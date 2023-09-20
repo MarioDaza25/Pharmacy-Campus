@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Cargo : BaseEntity
+public class Telephone : BaseEntity
 {
     
 }

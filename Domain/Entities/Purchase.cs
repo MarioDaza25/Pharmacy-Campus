@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Compra : BaseEntity
+public class Purchase : BaseEntity
 {
     
 }

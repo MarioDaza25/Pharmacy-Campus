@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Telefono : BaseEntity
+public class Product : BaseEntity
 {
     
 }

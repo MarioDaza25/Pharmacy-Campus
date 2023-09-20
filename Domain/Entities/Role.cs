@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Pais : BaseEntity
+public class Role : BaseEntity
 {
     
 }

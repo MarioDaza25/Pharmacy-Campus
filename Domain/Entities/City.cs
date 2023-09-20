@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Receta : BaseEntity
+public class City : BaseEntity
 {
     
 }

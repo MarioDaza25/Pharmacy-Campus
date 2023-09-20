@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class ProductoReceta
+public class User : BaseEntity
 {
     
 }

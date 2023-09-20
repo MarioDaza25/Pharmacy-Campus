@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Ciudad : BaseEntity
+public class Address : BaseEntity
 {
     
 }

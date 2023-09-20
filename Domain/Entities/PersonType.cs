@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class Barrio : BaseEntity
+public class PersonType : BaseEntity
 {
     
 }
