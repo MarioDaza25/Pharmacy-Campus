@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "Entities",
-    "Persistence"
+    "Persistence",
+    "ApiPharmacy"
   ]
 }
