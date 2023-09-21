@@ -1,8 +1,15 @@
 # Archivos y directorios generados por Visual Studio
-.vscode
-bin
-obj
+# Carpeta obj generada por .NET Core
+**/obj/
 
+# Carpeta bin generada por .NET Core
+**/bin/
+
+# Archivos temporales de Visual Studio
+.vscode/
+
+# Carpeta generada por Rider IDE
+.idea/
 # Directorio de dependencias NuGet
 packages
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4S0YIS4RsyoO4s4ZJAzEB7xIgonz/c0XlyBy3Rtq1Cu13SY8EO9MhwL26g30BY2cJ6ruxd0LjAIhHVIM2dBK4Q==",
+  "dgSpecHash": "PKKM0/ph4CVnJoXdJLp6iE72NQDH3jLAO22tHJQOtCEyELhh58stMfAtAnxf9rJi/jjjYY7ymgiOVZ3TCv3fhQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Application\\Application.csproj",
+  "projectFilePath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gio\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\gio\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
