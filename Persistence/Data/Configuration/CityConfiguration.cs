@@ -11,6 +11,14 @@ public class CityConfiguration : IEntityTypeConfiguration<City>
     {
         builder.ToTable("City");
 
+        builder.Property("Name")
+        .HasColumnName("CityName")
+        .IsRequired()
+        .HasMaxLength(50);
+
+        builder.HasOne(p => p.State)
+        .WithMany(p => p.Cities)
+        .HasForeignKey(p => p.State_Fk);
     
     }
 }

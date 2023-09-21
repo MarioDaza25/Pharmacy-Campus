@@ -10,7 +10,15 @@ public class NeighborhoodConfiguration : IEntityTypeConfiguration<Neighborhood>
     public void Configure(EntityTypeBuilder<Neighborhood> builder)
     {
         builder.ToTable("Neighborhood");
-
+                
+        builder.Property("Name")
+        .HasColumnName("NeighborhoodName")
+        .IsRequired()
+        .HasMaxLength(50);
+               
+        builder.HasOne(p => p.City)
+        .WithMany(p => p.Neighborhoods)
+        .HasForeignKey(p => p.City_Fk);
     
     }
 }

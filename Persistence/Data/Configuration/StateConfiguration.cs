@@ -11,6 +11,14 @@ public class StateConfiguration : IEntityTypeConfiguration<State>
     {
         builder.ToTable("State");
 
+        builder.Property("Name")
+        .HasColumnName("StateName")
+        .IsRequired()
+        .HasMaxLength(50);
     
+        builder.HasOne(p => p.Country)
+        .WithMany(p => p.States)
+        .HasForeignKey(p => p.Country_Fk);
+
     }
 }
