@@ -10,4 +10,6 @@ public static class ApplicationServiceExtension
                 .AllowAnyMethod()           //WithMethods(*GET", "POST")
                 .AllowAnyHeader());         //WithHeaders(*accept*, "content-type")
             });
+    
+            
 }
