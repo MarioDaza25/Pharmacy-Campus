@@ -26,8 +26,7 @@ public interface IUnitOfWork
      ITelephoneType TelephoneTypes { get; }
      IUser Users { get; }
      IRole Roles { get; }
-     IRefreshToken RefreshTokens { get; } 
-
+     
      Task<int> SaveAsync();
 
 
