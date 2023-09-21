@@ -24,5 +24,5 @@ public class Person : BaseEntity
   public ICollection<Telephone> Telephones { get; set; }
    public ICollection<Recipe> RecipesDoc { get; set; }
   public ICollection<Recipe> RecipesPat { get; set; }
-
+    public object User { get; set; }
 }
