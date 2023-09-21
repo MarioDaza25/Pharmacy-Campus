@@ -1,3 +1,4 @@
+using ApiPharmacy.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -18,12 +19,16 @@ builder.Services.AddDbContext<PharmacyContext>(options =>
 });
 var app = builder.Build();
 
+builder.Services.ConfigureCors();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
