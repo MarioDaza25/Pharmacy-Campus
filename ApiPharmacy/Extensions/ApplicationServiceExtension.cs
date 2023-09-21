@@ -1,4 +1,5 @@
 using Application.UnitOfWork;
+using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,8 +18,7 @@ public static class ApplicationServiceExtension
     
     public static void AddApplicationServices(this IServiceCollection services) 
         {
-            services.AddScoped<IUnitOfWork,UnitOfWork>;
-            services.AddScoped<IPasswordHasher,PasswordHasher>;
-
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
         }
 }
