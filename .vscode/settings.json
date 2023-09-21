@@ -5,6 +5,7 @@
     "ApiPharmacy",
     "Interfaces",
     "Repository",
-    "Application"
+    "Application",
+    "UnitOfWork"
   ]
 }
