@@ -18,8 +18,11 @@ public class Person : BaseEntity
   public ICollection<Email> Emails { get; set; }
   public ICollection<Product> Products { get; set; }
   public ICollection<Purchase> Purchases { get; set; }
-  public ICollection<Sale> SalesEmployees { get; set; }
-  public ICollection<Sale> SalesPatients { get; set; }
+  public ICollection<Sale> SalesEmp { get; set; }
+  public ICollection<Sale> SalesPat { get; set; }
   public ICollection<User> Users { get; set; }
   public ICollection<Telephone> Telephones { get; set; }
+   public ICollection<Recipe> RecipesDoc { get; set; }
+  public ICollection<Recipe> RecipesPat { get; set; }
+
 }
