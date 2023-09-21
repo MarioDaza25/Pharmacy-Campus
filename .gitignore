@@ -1,7 +1,7 @@
 # Archivos y directorios generados por Visual Studio
-.vscode
-bin
-obj
+.vscode/
+bin/
+obj/
 
 # Directorio de dependencias NuGet
 packages

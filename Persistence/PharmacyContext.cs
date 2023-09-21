@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence;
 
   public class PharmacyContext : DbContext
+
 {
         public PharmacyContext(DbContextOptions options) : base(options)
         {
@@ -34,9 +35,12 @@ namespace Persistence;
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-
-
-
+        public DbSet<Sale> Sales {get;set;}
+        public DbSet<State> States {get;set;}
+        public DbSet<Telephone> Telephones {get;set;}
+        public DbSet<TelephoneType> TelephoneTypes {get;set;}
+        
+     
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
