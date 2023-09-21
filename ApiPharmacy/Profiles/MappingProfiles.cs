@@ -6,7 +6,7 @@ namespace ApiPharmacy.Profiles;
 
 public class MappingProfiles : Profile
 {
-    protected MappingProfiles()
+    public MappingProfiles()
     {
         CreateMap<Person, EmployeeDto>().ReverseMap();
     }

@@ -9,11 +9,11 @@ using Microsoft.Extensions.Logging;
 namespace ApiPharmacy.Controllers
 {
     [Route("[controller]")]
-    public class CustomerController : Controller
+    public class SalesController : Controller
     {
-        private readonly ILogger<CustomerController> _logger;
+        private readonly ILogger<SalesController> _logger;
 
-        public CustomerController(ILogger<CustomerController> logger)
+        public SalesController(ILogger<SalesController> logger)
         {
             _logger = logger;
         }
