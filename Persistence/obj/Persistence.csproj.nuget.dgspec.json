@@ -4,14 +4,14 @@
     "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+    "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj",
+        "projectUniqueName": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj",
+        "projectPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\gio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\obj\\",
+        "outputPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gio\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,8 +97,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
+              "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+                "projectPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
               }
             }
           }

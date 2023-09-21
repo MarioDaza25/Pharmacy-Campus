@@ -5280,8 +5280,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
+            "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+              "projectPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
             }
           }
         }
