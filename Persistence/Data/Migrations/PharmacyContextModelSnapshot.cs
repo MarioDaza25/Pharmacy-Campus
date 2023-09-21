@@ -602,17 +602,17 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.UserRole", b =>
                 {
-                    b.Property<int>("User_Fk")
-                        .HasColumnType("int");
-
                     b.Property<int>("Role_Fk")
                         .HasColumnType("int");
 
-                    b.HasKey("User_Fk", "Role_Fk");
+                    b.Property<int>("User_Fk")
+                        .HasColumnType("int");
 
-                    b.HasIndex("Role_Fk");
+                    b.HasKey("Role_Fk", "User_Fk");
 
-                    b.ToTable("UserRole", (string)null);
+                    b.HasIndex("User_Fk");
+
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Domain.Entities.Address", b =>

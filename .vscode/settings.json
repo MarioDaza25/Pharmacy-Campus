@@ -2,6 +2,9 @@
   "conventionalCommits.scopes": [
     "Entities",
     "Persistence",
-    "ApiPharmacy"
+    "ApiPharmacy",
+    "Interfaces",
+    "Repository",
+    "Application"
   ]
 }

@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(PharmacyContext))]
-    [Migration("20230921055543_InitialCreate")]
+    [Migration("20230921084411_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,37 +29,41 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Details")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("NeighborhoodId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
 
                     b.Property<int>("Neighborhood_Fk")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<int>("Person_Fk")
                         .HasColumnType("int");
 
                     b.Property<string>("StreetName")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("StreetNumber")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.Property<string>("StreetType")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("StreetTypeNumber")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NeighborhoodId");
+                    b.HasIndex("Neighborhood_Fk");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("Person_Fk");
 
                     b.ToTable("Address", (string)null);
                 });
@@ -601,28 +605,32 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.UserRole", b =>
                 {
-                    b.Property<int>("User_Fk")
-                        .HasColumnType("int");
-
                     b.Property<int>("Role_Fk")
                         .HasColumnType("int");
 
-                    b.HasKey("User_Fk", "Role_Fk");
+                    b.Property<int>("User_Fk")
+                        .HasColumnType("int");
 
-                    b.HasIndex("Role_Fk");
+                    b.HasKey("Role_Fk", "User_Fk");
 
-                    b.ToTable("UserRole", (string)null);
+                    b.HasIndex("User_Fk");
+
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Domain.Entities.Address", b =>
                 {
                     b.HasOne("Domain.Entities.Neighborhood", "Neighborhood")
                         .WithMany("Addresses")
-                        .HasForeignKey("NeighborhoodId");
+                        .HasForeignKey("Neighborhood_Fk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Person", "Person")
                         .WithMany("Addresses")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("Person_Fk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Neighborhood");
 

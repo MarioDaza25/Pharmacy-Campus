@@ -560,7 +560,7 @@ namespace Persistence.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRole", x => new { x.User_Fk, x.Role_Fk });
+                    table.PrimaryKey("PK_UserRole", x => new { x.Role_Fk, x.User_Fk });
                     table.ForeignKey(
                         name: "FK_UserRole_JobTitle_Role_Fk",
                         column: x => x.Role_Fk,
@@ -582,46 +582,46 @@ namespace Persistence.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    StreetName = table.Column<string>(type: "longtext", nullable: true)
+                    StreetName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    StreetNumber = table.Column<string>(type: "longtext", nullable: true)
+                    StreetNumber = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    StreetType = table.Column<string>(type: "longtext", nullable: true)
+                    StreetType = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    StreetTypeNumber = table.Column<string>(type: "longtext", nullable: true)
+                    StreetTypeNumber = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Details = table.Column<string>(type: "longtext", nullable: true)
+                    Details = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Neighborhood_Fk = table.Column<int>(type: "int", nullable: false),
-                    NeighborhoodId = table.Column<int>(type: "int", nullable: true),
-                    Person_Fk = table.Column<int>(type: "int", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: true)
+                    Person_Fk = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_Neighborhood_NeighborhoodId",
-                        column: x => x.NeighborhoodId,
+                        name: "FK_Address_Neighborhood_Neighborhood_Fk",
+                        column: x => x.Neighborhood_Fk,
                         principalTable: "Neighborhood",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Address_Person_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_Address_Person_Person_Fk",
+                        column: x => x.Person_Fk,
                         principalTable: "Person",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_NeighborhoodId",
+                name: "IX_Address_Neighborhood_Fk",
                 table: "Address",
-                column: "NeighborhoodId");
+                column: "Neighborhood_Fk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_PersonId",
+                name: "IX_Address_Person_Fk",
                 table: "Address",
-                column: "PersonId");
+                column: "Person_Fk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_State_Fk",
@@ -754,9 +754,9 @@ namespace Persistence.Data.Migrations
                 column: "Employee_Fk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRole_Role_Fk",
+                name: "IX_UserRole_User_Fk",
                 table: "UserRole",
-                column: "Role_Fk");
+                column: "User_Fk");
         }
 
         /// <inheritdoc />
