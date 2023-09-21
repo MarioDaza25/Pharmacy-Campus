@@ -32,5 +32,22 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasOne(u => u.Employee)
         .WithMany(p => p.Users)
         .HasForeignKey(u => u.Employee_Fk);
+
+        builder.HasMany(p => p.JobsTitle)
+        .WithMany(p => p.Users)
+        .UsingEntity<UserRole>(
+            p => p
+                .HasOne(p => p.JobTitle)
+                .WithMany(p => p.UsersRole)
+                .HasForeignKey(p => p.Role_Fk),
+            p => p
+                .HasOne(p => p.User)
+                .WithMany(p => p.UsersRole)
+                .HasForeignKey(p => p.User_Fk),
+            p =>
+            {
+                p.HasKey(p => new {p.Role_Fk, p.User_Fk});
+            }
+        );
     }
 }
