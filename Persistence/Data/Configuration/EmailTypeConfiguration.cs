@@ -11,6 +11,9 @@ public class EmailTypeConfiguration : IEntityTypeConfiguration<EmailType>
     {
         builder.ToTable("EmailType");
 
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(45);
     
     }
 }

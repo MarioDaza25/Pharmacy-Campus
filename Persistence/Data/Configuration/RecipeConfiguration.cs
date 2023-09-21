@@ -11,6 +11,19 @@ public class RecipeConfiguration : IEntityTypeConfiguration<Recipe>
     {
         builder.ToTable("Recipe");
 
+        builder.Property(p => p.CreateDate)
+        .IsRequired();
+
+        builder.HasOne(p => p.Doctor)
+        .WithMany(p => p.RecipesDoc)
+        .HasForeignKey(p => p.Doctor_Fk)
+        .IsRequired();
+
+        builder.HasOne(p => p.Patient)
+        .WithMany(p => p.RecipesPat)
+        .HasForeignKey(p => p.Patient_Fk)
+        .IsRequired();
+
     
     }
 }

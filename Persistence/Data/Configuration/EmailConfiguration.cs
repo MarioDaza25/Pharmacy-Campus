@@ -11,6 +11,20 @@ public class EmailConfiguration : IEntityTypeConfiguration<Email>
     {
         builder.ToTable("Email");
 
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(255);
+
+        builder.HasOne(p => p.Person)
+        .WithMany(p => p.Emails)
+        .HasForeignKey(p => p.Person_Fk);
+
+        builder.HasOne(p => p.EmailType)
+        .WithMany(p => p.Emails)
+        .HasForeignKey(p => p.EmailType_Fk);
+
+
+
     
     }
 }

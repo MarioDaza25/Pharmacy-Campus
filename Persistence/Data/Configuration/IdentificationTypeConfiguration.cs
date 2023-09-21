@@ -11,6 +11,8 @@ public class IdentificationTypeConfiguration : IEntityTypeConfiguration<Identifi
     {
         builder.ToTable("IdentificationType");
 
-    
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(100);
     }
 }

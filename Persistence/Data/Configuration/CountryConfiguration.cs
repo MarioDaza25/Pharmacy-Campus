@@ -1,9 +1,8 @@
-
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistence.Data.Configurations;
+namespace Persistence.Data.Configuration;
 
 public class CountryConfiguration : IEntityTypeConfiguration<Country>
 {
@@ -14,7 +13,6 @@ public class CountryConfiguration : IEntityTypeConfiguration<Country>
         .HasColumnName("CountryName")
         .IsRequired()
         .HasMaxLength(50);
-    
-    
+
     }
 }

@@ -11,6 +11,8 @@ public class PersonTypeConfiguration : IEntityTypeConfiguration<PersonType>
     {
         builder.ToTable("PersonType");
 
-    
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(100);
     }
 }

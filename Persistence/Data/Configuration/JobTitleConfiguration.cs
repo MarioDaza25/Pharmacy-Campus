@@ -11,6 +11,8 @@ public class JobTitleConfiguration : IEntityTypeConfiguration<JobTitle>
     {
         builder.ToTable("JobTitle");
 
-    
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(100);
     }
 }

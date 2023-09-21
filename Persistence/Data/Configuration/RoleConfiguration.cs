@@ -11,6 +11,9 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
         builder.ToTable("Role");
 
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(100);
     
     }
 }

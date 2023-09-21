@@ -11,6 +11,9 @@ public class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod
     {
         builder.ToTable("PaymentMethod");
 
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(100);
     
     }
 }

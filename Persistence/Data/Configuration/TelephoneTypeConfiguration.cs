@@ -11,6 +11,10 @@ public class TelephoneTypeConfiguration : IEntityTypeConfiguration<TelephoneType
     {
         builder.ToTable("TelephoneType");
 
+        builder.Property(p => p.Description)
+        .IsRequired()
+        .HasMaxLength(45);
+
     
     }
 }
