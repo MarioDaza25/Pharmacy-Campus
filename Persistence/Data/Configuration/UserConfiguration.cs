@@ -29,8 +29,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         .HasMaxLength(100)
         .IsRequired();
 
-        /* builder.HasOne(u => u.Employee)
-        .WithOne(p => p.User)
-        .HasForeignKey<User>(u => u.Employee_Fk); */
+        builder.HasOne(u => u.Employee)
+        .WithMany(p => p.Users)
+        .HasForeignKey(u => u.Employee_Fk);
     }
 }
