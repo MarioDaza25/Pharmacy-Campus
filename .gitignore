@@ -1,0 +1,29 @@
+# Archivos y directorios generados por Visual Studio
+.vscode
+bin
+obj
+
+# Directorio de dependencias NuGet
+packages
+
+# Archivos de usuario y configuración
+.suo
+.user
+.sln.docstates
+
+# Logs y archivos temporales
+.log
+.swp
+Thumbs.db
+Desktop.ini
+
+# Archivos de compilación de .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts
+
+# Directorio de caché de Visual Studio
+.vscode
+
+# Paquetes de NuGet
+.nupkg
