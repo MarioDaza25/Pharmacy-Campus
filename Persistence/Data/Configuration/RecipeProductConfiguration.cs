@@ -1,3 +1,4 @@
+
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,3 +24,4 @@ public class RecipeProductConfiguration : IEntityTypeConfiguration<RecipeProduct
         .HasForeignKey(p => p.Recipe_Fk);
     }
 }
+

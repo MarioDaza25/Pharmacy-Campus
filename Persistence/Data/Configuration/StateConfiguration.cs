@@ -11,6 +11,7 @@ public class StateConfiguration : IEntityTypeConfiguration<State>
         builder.ToTable("State");
 
         builder.Property("Name")
+        .HasColumnName("StateName")
         .IsRequired()
         .HasMaxLength(50);
     
