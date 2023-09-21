@@ -1,3 +1,4 @@
+using System.Reflection;
 using ApiPharmacy.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -17,7 +18,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => 
 {c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); });
 builder.Services.ConfigureCors();
-
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
+builder.Services.AddApplicationServices();
 builder.Services.AddDbContext<PharmacyContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("ConexMysql");
