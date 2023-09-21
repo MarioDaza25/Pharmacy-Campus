@@ -11,6 +11,13 @@ public class PurchaseConfiguration : IEntityTypeConfiguration<Purchase>
     {
         builder.ToTable("Purchase");
 
-    
+        builder.Property(p => p.PurchaseDate)
+        .IsRequired()
+        .HasColumnType("DateTime");
+
+        builder.HasOne(p => p.Supplier)
+        .WithMany(p => p.Purchases)
+        .HasForeignKey(p => p.Supplier_Fk)
+        .IsRequired();
     }
 }
