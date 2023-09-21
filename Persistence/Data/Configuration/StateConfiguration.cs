@@ -1,4 +1,3 @@
-
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,6 +10,13 @@ public class StateConfiguration : IEntityTypeConfiguration<State>
     {
         builder.ToTable("State");
 
+        builder.Property("Name")
+        .IsRequired()
+        .HasMaxLength(50);
     
+        builder.HasOne(p => p.Country)
+        .WithMany(p => p.States)
+        .HasForeignKey(p => p.Country_Fk);
+
     }
 }
