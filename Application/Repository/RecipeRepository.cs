@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.Entities;
+using Domain.Interfaces;
+using Persistence;
 
-namespace Application.Repository
+namespace Application.Repository;
+public class RecipeRepository : GenericRepository<Recipe>, IRecipe
 {
-    public class RecipeRepository
+    private readonly PharmacyContext _context;
+    public RecipeRepository(PharmacyContext context) : base(context)
     {
-        
+        _context = context;
     }
 }

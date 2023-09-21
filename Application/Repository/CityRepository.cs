@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.Entities;
+using Domain.Interfaces;
+using Persistence;
 
-namespace Application.Repository
+namespace Application.Repository;
+
+public class CityRepository : GenericRepository<City>, ICity
 {
-    public class CityRepository
+    private readonly PharmacyContext _context;
+    public CityRepository(PharmacyContext context) : base(context)
     {
-        
+        _context = context; 
     }
 }

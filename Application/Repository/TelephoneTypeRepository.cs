@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.Entities;
+using Domain.Interfaces;
+using Persistence;
 
-namespace Application.Repository
+namespace Application.Repository;
+
+public class TelephoneTypeRepository : GenericRepository<TelephoneType>, ITelephoneType
 {
-    public class TelephoneTypeRepository
+    private readonly PharmacyContext _context;
+    public TelephoneTypeRepository(PharmacyContext context) : base(context)
     {
-        
+        _context = context;
     }
+
 }

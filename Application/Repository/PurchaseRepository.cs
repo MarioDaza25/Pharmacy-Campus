@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.Entities;
+using Domain.Interfaces;
+using Persistence;
 
-namespace Application.Repository
+namespace Application.Repository;
+
+public class PurchaseRepository : GenericRepository<Purchase>, IPurchase
 {
-    public class PurchaseRepository
+    private readonly PharmacyContext _context;
+    public PurchaseRepository(PharmacyContext context) : base(context)
     {
-        
+        _context = context;
     }
 }
