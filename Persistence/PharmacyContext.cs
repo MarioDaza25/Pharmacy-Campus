@@ -10,6 +10,7 @@ namespace Persistence;
         public PharmacyContext(DbContextOptions options) : base(options)
         {
         }
+        
         public DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -35,8 +36,7 @@ namespace Persistence;
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
