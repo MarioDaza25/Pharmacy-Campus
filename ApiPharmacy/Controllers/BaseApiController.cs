@@ -6,5 +6,5 @@ namespace ApiPharmacy.Controllers;
 [Route("ApiPharmacy/[controller]")]
 public class BaseApiController : ControllerBase
 {
-    p;[
+    
 }

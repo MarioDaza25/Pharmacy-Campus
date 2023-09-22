@@ -15,4 +15,6 @@ public class ProductRepository : GenericRepository<Product>, IProduct
     {
         _context = context;
     }
+
+    
 }
