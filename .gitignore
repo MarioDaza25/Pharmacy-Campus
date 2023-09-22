@@ -33,3 +33,5 @@ artifacts
 
 # Paquetes de NuGet
 .nupkg
+
+.gitignore
