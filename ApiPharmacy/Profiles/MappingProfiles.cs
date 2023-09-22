@@ -9,6 +9,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Person, EmployeeDto>().ReverseMap();
+<<<<<<< HEAD
         
         CreateMap<Recipe, RecipeDto>().ReverseMap();
 
@@ -17,5 +18,8 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.PersonType_Fk, opt => opt.Ignore())
             .ForMember(dest => dest.Role_Fk, opt => opt.Ignore())
             .ForMember(dest => dest.JobTitle_Fk, opt => opt.Ignore());
+=======
+        CreateMap<Person, SupplierDto>().ReverseMap();
+>>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
     }
 }

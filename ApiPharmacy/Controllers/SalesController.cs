@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Interfaces;
+=======
+
+>>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
