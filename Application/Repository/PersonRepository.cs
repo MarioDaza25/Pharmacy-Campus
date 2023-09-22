@@ -13,6 +13,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         _context = context;
     }
 
+
     public async Task<IEnumerable<Person>> GetSalePatientProduct(string product)
     {
         return await (from p in _context.Products
