@@ -6617,35 +6617,12 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\gio\\.nuget\\packages\\": {}
-=======
     "C:\\Users\\mario\\.nuget\\packages\\": {}
->>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "projectUniqueName": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
-      "projectName": "ApiPharmacy",
-      "projectPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
-      "packagesPath": "C:\\Users\\gio\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\gio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-      "projectUniqueName": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
-=======
-      "projectUniqueName": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
->>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
->>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
       "projectName": "ApiPharmacy",
       "projectPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
@@ -6653,40 +6630,20 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-<<<<<<< HEAD
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-=======
         "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
->>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-<<<<<<< HEAD
             "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj": {
               "projectPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj"
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Application\\Application.csproj": {
-              "projectPath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Application\\Application.csproj"
-=======
-            "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj"
->>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
-=======
-            "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj": {
-              "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj"
->>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
->>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
             }
           }
         }
@@ -6759,20 +6716,8 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
-=======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
->>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
