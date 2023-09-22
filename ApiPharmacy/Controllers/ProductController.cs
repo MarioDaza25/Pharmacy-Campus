@@ -36,7 +36,22 @@ public class ProductController : BaseApiController
         var products = await _unitOfWork.Products.GetByIdAsync(id);
         return Ok(products);
     }
+    // creacion controller de product < 50
+    [HttpGet("{GetLessThan/amount}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
 
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetLessThan(int amount)
+    {
+        var products = await _unitOfWork.Products.GetLessThanStockAsync(amount);
+        if(products == null)
+        {
+            return NotFound("No se encontraron productos menores a " + amount );
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -87,4 +102,6 @@ public class ProductController : BaseApiController
 
         return NoContent();
     }
+
+
 }

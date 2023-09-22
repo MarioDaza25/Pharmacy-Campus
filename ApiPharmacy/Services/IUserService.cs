@@ -1,9 +1,12 @@
+using ApiJwt.Dtos;
+using ApiPharmacy.Dtos;
+
 namespace ApiPharmacy.Services;
 
 public interface IUserService
 {
-    Task<string> RegisterAsync<RegisterDto model>;
-    Task<string> AddRoleAsync<AddRoleDto model>; 
-    Task<DataUserDto> GetTokenAsync<LoginDto model>;
-    Task<DataUserDto> RefreshTokenAsync<string refreshToken>
+    Task<string> RegisterToken(RegisterDto model);
+    Task<string> AddRoleAsync(AddRoleDto model); 
+    Task<DataUserDto> GetTokenAsync(LoginDto model);
+    Task<DataUserDto> RefreshTokenAsync(string refreshToken);
 }

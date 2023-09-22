@@ -9,7 +9,7 @@ public class Authorization
             Employee
         }
 
-        public const Roles rol_default = Roles.Employee
+        public const Roles rol_default = Roles.Employee;
 
 
 }
