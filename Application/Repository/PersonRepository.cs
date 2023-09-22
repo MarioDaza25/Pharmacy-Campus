@@ -1,6 +1,5 @@
 using Domain.Entities;
 using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Repository;
@@ -12,8 +11,4 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     {
         _context = context;
     }
-
-    
-
-
 }

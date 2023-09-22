@@ -1,7 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiJwt.Dtos;
+namespace ApiPharmacy.Dtos;
 
 public class AddRoleDto
 {
