@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yK8ZNJhm7CUTgFWkhGvbQXqg3nRw1M6GuA7UvsazSvklNyuHZvFxrLLSWT4BUtd6ZmdN5PHE/NHbVLc1V1btTQ==",
+  "dgSpecHash": "Ofyj+SDheIXujQ5vutlIkggISlYy5WZX8RVksbkl1mRmpoY7WQogXDgRho9obpIRuFapMtKNXXriq8puYHUoZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
+  "projectFilePath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
