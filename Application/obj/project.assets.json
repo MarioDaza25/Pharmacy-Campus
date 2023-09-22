@@ -5278,11 +5278,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\obj\\",
+      "outputPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -5297,8 +5297,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
-              "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
+            "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
             },
             "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj": {
               "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj"
