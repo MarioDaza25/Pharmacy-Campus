@@ -1,4 +1,4 @@
-wusing ApiPharmacy.Dtos;
+using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
 
-public class EmployeeController : BaseApiController
+    
+public class ProductController : BaseApiController
 {
-    private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public EmployeeController(IUnitOfWork unitOfWork, IMapper mapper)
+    public ProductController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -20,10 +21,10 @@ public class EmployeeController : BaseApiController
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> Get()
     {
-        var employees = await _unitOfWork.People.GetAllAsync();
-        return _mapper.Map<List<EmployeeDto>>(employees);
+        var products = await _unitOfWork.Products.GetAllAsync();
+        return _mapper.Map<List<ProductDto>>(products);
     }
 
 
@@ -32,42 +33,42 @@ public class EmployeeController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(int id)
     {
-        var employee = await _unitOfWork.People.GetByIdAsync(id);
-        return Ok(employee);
+        var products = await _unitOfWork.Products.GetByIdAsync(id);
+        return Ok(products);
     }
 
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Person>> Post(EmployeeDto employeeDto)
+    public async Task<ActionResult<Product>> Post(ProductDto productDto)
     {
-        var employee = _mapper.Map<Person>(employeeDto);
-        _unitOfWork.People.Add(employee);
+        var product = _mapper.Map<Product>(productDto);
+        _unitOfWork.Products.Add(product);
         await _unitOfWork.SaveAsync();
-        if (employeeDto == null)
+        if (productDto == null)
         {
             return BadRequest();
         }
-        employeeDto.Id = employee.Id;
-        return CreatedAtAction(nameof(Post), new { id = employeeDto.Id }, employeeDto);
+        productDto.Id = product.Id;
+        return CreatedAtAction(nameof(Post), new { id = productDto.Id }, productDto);
     }
 
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<EmployeeDto>> Put(int id, [FromBody] EmployeeDto employeeDto)
+    public async Task<ActionResult<ProductDto>> Put(int id, [FromBody] ProductDto productDto)
     {
-        if (employeeDto == null)
+        if (productDto == null)
         {
             return NotFound();
         }
-        var employee = _mapper.Map<Person>(employeeDto);
-        _unitOfWork.People.Update(employee);
+        var product = _mapper.Map<Product>(productDto);
+        _unitOfWork.Products.Update(product);
         await _unitOfWork.SaveAsync();
 
-        return employeeDto;
+        return productDto;
     }
 
     [HttpDelete("{id}")]
@@ -75,13 +76,13 @@ public class EmployeeController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Delete(int id)
     {
-        var employee = await _unitOfWork.People.GetByIdAsync(id);
-        if (employee == null)
+        var product = await _unitOfWork.Products.GetByIdAsync(id);
+        if (product == null)
         {
             return NotFound();
         }
 
-        _unitOfWork.People.Remove(employee);
+        _unitOfWork.Products.Remove(product);
         await _unitOfWork.SaveAsync();
 
         return NoContent();

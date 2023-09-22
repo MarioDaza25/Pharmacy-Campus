@@ -12,12 +12,12 @@ namespace Application.Repository
         {
             _context = context;
         }
-
+        
         public async Task<User> GetByUsernameAsync(string username)
         {
             return await _context.Users
-                                .Include(u=>u.JobsTitle)
-                                .FirstOrDefaultAsync(u=>u.Username.ToLower()==username.ToLower());
+                        .Include(u=>u.JobsTitle)
+                        .FirstOrDefaultAsync(u=>u.Username.ToLower()==username.ToLower());
         }
         public async Task<User> GetByRefreshTokenAsync(string refreshToken)
         {
@@ -26,5 +26,7 @@ namespace Application.Repository
                 .Include(u => u.RefreshTokens)
                 .FirstOrDefaultAsync(u => u.RefreshTokens.Any(t => t.Token == refreshToken));
         }
+
+        
     }
 }
