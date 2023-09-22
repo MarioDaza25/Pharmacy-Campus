@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R9lITomuLKsymUqqApbqFlGn9f0vwKy/dEy2XcZOPjK61KGsqlpQA/SlED03UM1adllFlGI/ZoJuHmyQC6r0aA==",
+  "dgSpecHash": "UiPBZp20Yqx4H8xp81jKbg8SmFE6WkV3kV0I+N7q/fvM3jslxgx5or1qcJAOkfUyMp7Kd4dGCxFvL28q+CWUBA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
+  "projectFilePath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gio\\.nuget\\packages\\aspnetcoreratelimit\\5.0.0\\aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "C:\\Users\\gio\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
@@ -129,12 +129,5 @@
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

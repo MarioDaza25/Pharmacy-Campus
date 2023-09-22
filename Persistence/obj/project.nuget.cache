@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7i4M1bq3D1PWuKi/t1gKa9iFbv66D/y+Q9PrYDti1zcdloPkwhH0kavGRRvn1ICV8INUQda4O1Vp5fRTqJJf+w==",
+  "dgSpecHash": "N17xS/5Cf2pu74Eod6jL+Y3cEURRBNG3dE2u4UTpIsysVhbUbmvLiKkLHSFosR2bJ01orekR84kEj0HpbPLxNQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
+  "projectFilePath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gio\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\gio\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
@@ -97,12 +97,5 @@
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
