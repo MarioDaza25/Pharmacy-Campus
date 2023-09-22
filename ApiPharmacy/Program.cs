@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen(c =>
 {c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); });
 builder.Services.ConfigureCors(); // aplica el cors de serviceExtension
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly()); // aplica automapper
+builder.Service.AddJwt(builder.Configuration); //Aplicacion de JWT
 builder.Services.AddApplicationServices(); // para que aplique el archivo de extensions
 builder.Services.AddDbContext<PharmacyContext>(options =>
 {

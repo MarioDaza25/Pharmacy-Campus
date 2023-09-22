@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "R9lITomuLKsymUqqApbqFlGn9f0vwKy/dEy2XcZOPjK61KGsqlpQA/SlED03UM1adllFlGI/ZoJuHmyQC6r0aA==",
   "success": true,
   "projectFilePath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
@@ -131,8 +132,11 @@
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
 =======
   "dgSpecHash": "WgdkEyck0nB/d9moG/V43xvqc8JVjKc4I/w9jJu243MhAW4aTIw/tTHEpfXY3eKVJwm0t9ApHgr/xILndChHyA==",
+=======
+  "dgSpecHash": "qEXlciOdURNzCNZpoKXDSW2T9ZWN5IPdrvFLYhrCm0bBCtbiFWaPzSKWN28NX3QstdR9HQv3tXUhFqYbdKqc0g==",
+>>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
   "success": true,
-  "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
+  "projectFilePath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\aspnetcoreratelimit\\5.0.0\\aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",

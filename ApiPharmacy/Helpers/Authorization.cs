@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace ApiPharmacy.Helpers;
 
-namespace ApiPharmacy.Helpers
+public class Authorization
 {
-    public class Authorization
-    {
-        ik
-    }
+    public enum Roles
+        {
+            Administrator,
+            Manager,
+            Employee
+        }
+
+        public const Roles rol_default = Roles.Employee;
+
+
 }

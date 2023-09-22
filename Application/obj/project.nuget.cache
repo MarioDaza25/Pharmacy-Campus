@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "4S0YIS4RsyoO4s4ZJAzEB7xIgonz/c0XlyBy3Rtq1Cu13SY8EO9MhwL26g30BY2cJ6ruxd0LjAIhHVIM2dBK4Q==",
   "success": true,
   "projectFilePath": "c:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Application\\Application.csproj",
@@ -99,8 +100,11 @@
     "C:\\Users\\gio\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
 =======
   "dgSpecHash": "yK8ZNJhm7CUTgFWkhGvbQXqg3nRw1M6GuA7UvsazSvklNyuHZvFxrLLSWT4BUtd6ZmdN5PHE/NHbVLc1V1btTQ==",
+=======
+  "dgSpecHash": "Ofyj+SDheIXujQ5vutlIkggISlYy5WZX8RVksbkl1mRmpoY7WQogXDgRho9obpIRuFapMtKNXXriq8puYHUoZA==",
+>>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
   "success": true,
-  "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
+  "projectFilePath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
