@@ -35,8 +35,13 @@ namespace Persistence;
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+<<<<<<< HEAD
      
 
+=======
+        
+        
+>>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
