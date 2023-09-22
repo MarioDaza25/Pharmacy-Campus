@@ -36,22 +36,6 @@ public class ProductController : BaseApiController
         var products = await _unitOfWork.Products.GetByIdAsync(id);
         return Ok(products);
     }
-    // creacion controller de product < 50
-    [HttpGet("{GetLessThan/amount}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-
-    public async Task<ActionResult<IEnumerable<ProductDto>>> GetLessThan(int amount)
-    {
-        var products = await _unitOfWork.Products.GetLessThanStockAsync(amount);
-        if(products == null)
-        {
-            return NotFound("No se encontraron productos menores a " + amount );
-        }
-        return _mapper.Map<List<ProductDto>>(products);
-
-    }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -103,5 +87,53 @@ public class ProductController : BaseApiController
         return NoContent();
     }
 
+        // creacion controller de product < 50
+    [HttpGet("GetLessThan/{amount}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
 
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetLessThan(int amount)
+    {
+        var products = await _unitOfWork.Products.GetLessThanStockAsync(amount);
+        if(products == null)
+        {
+            return NotFound("No se encontraron productos menores a " + amount );
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
+    // Medicamentos que caducan antes del 1 de enero de 2024.
+    [HttpGet("GetProductsExpired/{expiryDate}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductExpiredBefore(DateTime ExpiryDate)
+    {
+        var products = await _unitOfWork.Products.GetAllProductExpiredBeforeAsync(ExpiryDate);
+        if(products == null)
+        {
+            return NotFound("No se encontraron productos a expirar en la fecha " + ExpiryDate );
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
+    //Medicamentos con un precio mayor a 50 y un stock menor a 100.
+    
+    [HttpGet("GetHighPricedLowStock/{price}/{stock}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetHighPricedLowStock(decimal price, double stock)
+    {
+        var products = await _unitOfWork.Products.GetHighPricedLowStockAsync(price,stock);
+        if(products == null)
+        {
+            return NotFound($"No se encontraron productos con un precio mayor a {price} y un stock menor a  {stock}.");
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
 }
