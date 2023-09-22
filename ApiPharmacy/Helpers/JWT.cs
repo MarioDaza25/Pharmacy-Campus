@@ -8,3 +8,6 @@ namespace ApiPharmacy.Helpers
         public DateTime DurationInMinutes {get;set;}
     }
 }
+
+
+
