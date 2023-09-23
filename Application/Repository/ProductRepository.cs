@@ -38,7 +38,7 @@ public class ProductRepository : GenericRepository<Product>, IProduct
     public async Task<IEnumerable<Product>> GetAllProductsNeverSold()
     {
         return await _context.Products
-                            .Where(p => p.SaleProducts == null)
+                            .Where(p => !p.SaleProducts.Any())
                             .ToListAsync();
     }
 }
