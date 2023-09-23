@@ -34,5 +34,11 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                             .Where(p => p.Price > price && p.Stock < stock)
                             .ToListAsync();
     } 
-
+    //Medicamentos que no han sido vendidos nunca.
+    public async Task<IEnumerable<Product>> GetAllProductsNeverSold()
+    {
+        return await _context.Products
+                            .Where(p => p.SaleProducts == null)
+                            .ToListAsync();
+    }
 }

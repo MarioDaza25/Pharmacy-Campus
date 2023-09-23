@@ -136,4 +136,20 @@ public class ProductController : BaseApiController
         return _mapper.Map<List<ProductDto>>(products);
 
     }
+    [HttpGet("GetAllProductsNeverSold")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsNeverSold()
+    {
+        var products = await _unitOfWork.Products.GetAllProductsNeverSold();
+        if(products == null)
+        {
+            return NotFound($"Actualmente todos los productos han tenido ventas ");
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    } 
+
+
 }
