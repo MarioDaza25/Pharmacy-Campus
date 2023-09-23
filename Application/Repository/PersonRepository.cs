@@ -22,6 +22,13 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                         where p.Name.ToUpper() == product.ToUpper()
                         select pat).ToListAsync();
     }
+
+    //Obtiene todos los proveedores que no han vendido en ultimo año
+  public async Task<IEnumerable<Person>> GetSuppliersNoSalesAtYear()
+  {
+    return new List<Person>();
+
+  }
 }
 
 
