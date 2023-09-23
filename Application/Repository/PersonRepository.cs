@@ -11,10 +11,6 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     {
         _context = context;
     }
-<<<<<<< HEAD
-}
-=======
-
 
     public async Task<IEnumerable<Person>> GetSalePatientProduct(string product)
     {
@@ -32,4 +28,4 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                     join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
                     where p.Name.ToUpper() == product.ToUpper()
                     select sp).CountAsync(); */
->>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
+
