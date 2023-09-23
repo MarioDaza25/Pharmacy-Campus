@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+using ApiPharmacy.Dtos;
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
 using ApiPharmacy.Helpers;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -19,7 +23,13 @@ public class UserService
         _passwordHasher = passwordHasher;
     }
 
+<<<<<<< HEAD
     // public async Task<string RegisterAsync(RegisterDto registerDto)
     // {}
+=======
+    
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
     //build : construccion de jwt en proceso, me lo dejan a mi, no avancen, igualmente no afecta el flujo de ejecucion del programa
+
+    //Valla cooma Mierda!!!! Siquiere le muestro todo lo que produjo CDTM
 }

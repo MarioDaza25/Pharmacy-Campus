@@ -24,7 +24,12 @@ public static class ApplicationServiceExtension
             services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
         }
 
+<<<<<<< HEAD
      public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+=======
+    public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
     {
         //Configuration from AppSettings
         services.Configure<JWT>(configuration.GetSection("JWT"));
