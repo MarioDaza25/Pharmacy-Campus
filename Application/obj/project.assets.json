@@ -5273,19 +5273,19 @@
     ]
   },
   "packageFolders": {
-    "/home/codespace/.nuget/packages/": {}
+    "C:\\Users\\APT01-65\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/workspaces/Pharmacy-Campus/Application/Application.csproj",
+      "projectUniqueName": "C:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "/workspaces/Pharmacy-Campus/Application/Application.csproj",
-      "packagesPath": "/home/codespace/.nuget/packages/",
-      "outputPath": "/workspaces/Pharmacy-Campus/Application/obj/",
+      "projectPath": "C:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\APT01-65\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/codespace/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\APT01-65\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -5297,11 +5297,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/workspaces/Pharmacy-Campus/Domain/Domain.csproj": {
-              "projectPath": "/workspaces/Pharmacy-Campus/Domain/Domain.csproj"
+            "c:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+              "projectPath": "c:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Domain\\Domain.csproj"
             },
-            "/workspaces/Pharmacy-Campus/Persistence/Persistence.csproj": {
-              "projectPath": "/workspaces/Pharmacy-Campus/Persistence/Persistence.csproj"
+            "c:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Persistence\\Persistence.csproj": {
+              "projectPath": "c:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Persistence\\Persistence.csproj"
             }
           }
         }
@@ -5331,8 +5331,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/opt/dotnet/7.0.400/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché C:\\Users\\APT01-65\\Documents\\Pharmacy-Campus\\Application\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

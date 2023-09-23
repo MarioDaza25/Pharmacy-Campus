@@ -11,4 +11,6 @@ public class SaleProductRepository : GenericRepository<SaleProduct>, ISaleProduc
     {
         _context = context;
     }
+
+    
 }

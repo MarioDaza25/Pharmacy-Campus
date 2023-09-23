@@ -20,7 +20,7 @@ namespace Persistence;
         public DbSet<Neighborhood> Neighborhoods { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<Person> PersonTypes { get; set; }
+        public DbSet<PersonType> PersonTypes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Recipe> Recipes{ get; set; }
@@ -35,13 +35,8 @@ namespace Persistence;
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Sale> Sales {get;set;}
-        public DbSet<State> States {get;set;}
-        public DbSet<Telephone> Telephones {get;set;}
-        public DbSet<TelephoneType> TelephoneTypes {get;set;}
         
-     
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
