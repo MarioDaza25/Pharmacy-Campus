@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "miTwEU7isqxm9SRuS4yvkgh84eFcZOx9Cq5LkKxRTtYXLRFOarpJqc+hqvBWpFXbBmOc4K/IuQLk37Hneowt+Q==",
 =======
 <<<<<<< HEAD
@@ -108,6 +109,9 @@
   "dgSpecHash": "zBrERWW7jRZif1Swa2wOFdeV337BrkUv8cS2ftkzvBii0yz+MEojchBnXbKrPqLsVuJ5LQLoTxIEHGKkUTw5aA==",
 >>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
 >>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
+=======
+  "dgSpecHash": "Ofkrgy8lb+wiAcc7XdUutIXiFIKeLgJ+vWwt/YAh2d42vMizysNe4s1QzO7MOqS4BkXzBE30lKl7Jf3m9bVx8g==",
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
   "success": true,
   "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -198,8 +202,11 @@
     "C:\\Users\\mario\\.nuget\\packages\\system.threading.threadpool\\4.3.0\\system.threading.threadpool.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+<<<<<<< HEAD
 >>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
 >>>>>>> f1c63b63ce842c76b7215fe75c49709f94c5d760
+=======
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
   ],
   "logs": []
 }

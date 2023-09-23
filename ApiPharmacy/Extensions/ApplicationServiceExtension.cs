@@ -26,6 +26,7 @@ public static class ApplicationServiceExtension
 
 
     public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+
     {
         //Configuration from AppSettings
         services.Configure<JWT>(configuration.GetSection("JWT"));

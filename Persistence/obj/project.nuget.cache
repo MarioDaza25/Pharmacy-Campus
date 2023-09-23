@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "N17xS/5Cf2pu74Eod6jL+Y3cEURRBNG3dE2u4UTpIsysVhbUbmvLiKkLHSFosR2bJ01orekR84kEj0HpbPLxNQ==",
 =======
 <<<<<<< HEAD
@@ -108,13 +109,11 @@
 <<<<<<< HEAD
 =======
 =======
-  "dgSpecHash": "0OLvCR1sAWKejhAPGkwPTmTMwgQ/tkhDXEyRg+ob4NViDgiA8Q0mtX+Em/ButR5bgBUmrv6tGSM2GyDNggQIJw==",
 =======
-  "dgSpecHash": "53vGdj+b0hQ8vpm4dvQ4cI4WIqy8hE158kMfECzavwGcZZng+BN2C3PV1DoMUWquv9WLowL9+10Zkh8YhofDOg==",
->>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
->>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
+  "dgSpecHash": "0OLvCR1sAWKejhAPGkwPTmTMwgQ/tkhDXEyRg+ob4NViDgiA8Q0mtX+Em/ButR5bgBUmrv6tGSM2GyDNggQIJw==",
   "success": true,
-  "projectFilePath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
+  "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
@@ -208,8 +207,11 @@
     "C:\\Users\\mario\\.nuget\\packages\\system.threading.threadpool\\4.3.0\\system.threading.threadpool.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+<<<<<<< HEAD
 >>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
 >>>>>>> f1c63b63ce842c76b7215fe75c49709f94c5d760
+=======
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
   ],
   "logs": []
 }

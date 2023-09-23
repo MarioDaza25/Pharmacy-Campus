@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "UiPBZp20Yqx4H8xp81jKbg8SmFE6WkV3kV0I+N7q/fvM3jslxgx5or1qcJAOkfUyMp7Kd4dGCxFvL28q+CWUBA==",
 =======
 <<<<<<< HEAD
@@ -140,11 +141,9 @@
 <<<<<<< HEAD
 =======
 =======
-  "dgSpecHash": "WgdkEyck0nB/d9moG/V43xvqc8JVjKc4I/w9jJu243MhAW4aTIw/tTHEpfXY3eKVJwm0t9ApHgr/xILndChHyA==",
 =======
-  "dgSpecHash": "qEXlciOdURNzCNZpoKXDSW2T9ZWN5IPdrvFLYhrCm0bBCtbiFWaPzSKWN28NX3QstdR9HQv3tXUhFqYbdKqc0g==",
->>>>>>> 1e4f5d8eeb55068830f785c632fcec3cd0e48bec
->>>>>>> 56e0187484f92372cfeec833e3ffa2e6a462bc51
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
+  "dgSpecHash": "WgdkEyck0nB/d9moG/V43xvqc8JVjKc4I/w9jJu243MhAW4aTIw/tTHEpfXY3eKVJwm0t9ApHgr/xILndChHyA==",
   "success": true,
   "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
   "expectedPackageFiles": [
@@ -272,8 +271,11 @@
     "C:\\Users\\mario\\.nuget\\packages\\system.threading.threadpool\\4.3.0\\system.threading.threadpool.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+<<<<<<< HEAD
 >>>>>>> 54a7a32eb9538b650670a4899766c852f1952362
 >>>>>>> f1c63b63ce842c76b7215fe75c49709f94c5d760
+=======
+>>>>>>> f4a3fadce8a7051146e98d06efe41a55bc61f8ff
   ],
   "logs": []
 }
