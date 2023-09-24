@@ -5254,32 +5254,47 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mario\\.nuget\\packages\\": {}
+    "C:\\Users\\gio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
       "projectName": "Persistence",
       "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
       "outputPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Persistence\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
+      "projectName": "Persistence",
+      "projectPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\Persistence.csproj",
+      "packagesPath": "C:\\Users\\gio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Persistence\\obj\\",
+>>>>>>> af3703b5ae04927605a6789fd7ea216d0b63c467
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\gio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+<<<<<<< HEAD
             "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
               "projectPath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
+=======
+            "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\gio\\Documents\\PROGRAMACION\\Campus\\projectsNetCore\\Pharmacy-Campus\\Domain\\Domain.csproj"
+>>>>>>> af3703b5ae04927605a6789fd7ea216d0b63c467
             }
           }
         }
@@ -5323,7 +5338,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
