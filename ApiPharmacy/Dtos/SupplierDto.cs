@@ -9,5 +9,7 @@ namespace ApiPharmacy.Dtos;
         public string Name { get; set; }
         public int PersonType_Fk { get; set; }
         public int Role_Fk { get; set; }
+        public int JobTitle_Fk { get; set; }
+        public DateTime HireDate { get; set; } = DateTime.Now;
         
     }

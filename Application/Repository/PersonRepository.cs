@@ -13,7 +13,6 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         _context = context;
     }
 
-
     public async Task<IEnumerable<Person>> GetSalePatientProduct(string product)
     {
         return await (from p in _context.Products
@@ -23,6 +22,13 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                         where p.Name.ToUpper() == product.ToUpper()
                         select pat).ToListAsync();
     }
+
+    //Obtiene todos los proveedores que no han vendido en ultimo año
+  public async Task<IEnumerable<Person>> GetSuppliersNoSalesAtYear()
+  {
+    return new List<Person>();
+
+  }
 }
 
 
@@ -30,3 +36,4 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                     join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
                     where p.Name.ToUpper() == product.ToUpper()
                     select sp).CountAsync(); */
+
