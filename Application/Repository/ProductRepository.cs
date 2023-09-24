@@ -51,9 +51,22 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                                     saleProduct.Sale.SaleDate >= year.AddYears(-1) && saleProduct.Sale.SaleDate <= year.Date))
                                     .ToListAsync();
     }                      
-    // public async Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month)
-    // {
-    // //    return await _context.Products
-
-    // }
+    public async Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month)
+    {
+        return await _context.Products
+                            .Where(product =>
+                                product.SaleProducts.Any(saleProduct =>
+                                    saleProduct.Sale.SaleDate.Month == month))
+                                    .ToListAsync();
+    }
+    //Medicamentos comprados al ‘Proveedor A’.
+    public async Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier)
+    {
+        return await _context.Products
+                            .Where(product =>
+                                product.PurchaseProducts.Any(purchaseProduct =>
+                                    purchaseProduct.Purchase.Supplier.Name == supplier ))
+                                    .ToListAsync();
+                            
+    } 
 }
