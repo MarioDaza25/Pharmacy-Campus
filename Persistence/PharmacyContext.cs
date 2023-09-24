@@ -21,7 +21,7 @@ namespace Persistence;
         public DbSet<Neighborhood> Neighborhoods { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<Person> PersonTypes { get; set; }
+        public DbSet<PersonType> PersonTypes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Recipe> Recipes{ get; set; }

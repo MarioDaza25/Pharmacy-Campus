@@ -14,6 +14,7 @@ namespace Application.Repository
         }
         
         public async Task<User> GetByUsernameAsync(string username)
+        
         {
             return await _context.Users
                         .Include(u=>u.JobsTitle)

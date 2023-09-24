@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Interfaces;
 using Persistence;
@@ -15,4 +11,6 @@ public class ProductRepository : GenericRepository<Product>, IProduct
     {
         _context = context;
     }
+
+    
 }

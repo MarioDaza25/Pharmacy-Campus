@@ -1,4 +1,4 @@
-wusing ApiPharmacy.Dtos;
+using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;

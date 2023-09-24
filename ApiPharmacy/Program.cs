@@ -2,7 +2,6 @@ using System.Reflection;
 using ApiPharmacy.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +10,7 @@ builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
     options.ReturnHttpNotAcceptable = true;
-}).AddXmlSerializerFormatters();
+}).AddXmlSerializerFormatters(); 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 {c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); });
 builder.Services.ConfigureCors(); // aplica el cors de serviceExtension
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly()); // aplica automapper
-builder.Service.AddJwt(builder.Configuration); //Aplicacion de JWT
+builder.Services.AddJwt(builder.Configuration); //Aplicacion de JWT
 builder.Services.AddApplicationServices(); // para que aplique el archivo de extensions
 builder.Services.AddDbContext<PharmacyContext>(options =>
 {
