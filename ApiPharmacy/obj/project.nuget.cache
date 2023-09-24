@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "stFcohcCT35dwkiiq2OJCU/hEEOSjBL97ncK3AmhOguxrjHVh+NJ36/X8W3GUygJ2QqNizjncPAnPsgAos8BIw==",
+  "dgSpecHash": "2ULSsgSMmeH5UTPpSVQfALOfp5mnCeXuE+mCK+1KctCUNA+XZ/7Wjwp+8E7hoPbBovvHBCprQCgEC2LvHvTPRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
+  "projectFilePath": "c:\\Users\\mario\\OneDrive\\Documentos\\PROGRAMACION\\NetCore\\Pharmacy-Campus\\ApiPharmacy\\ApiPharmacy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mario\\.nuget\\packages\\aspnetcoreratelimit\\5.0.0\\aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",

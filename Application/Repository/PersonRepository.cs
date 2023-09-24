@@ -23,7 +23,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                         select pat).ToListAsync();
     }
 
-<<<<<<< HEAD
+
     public async Task<IEnumerable<Person>> GetSalePatientProductYear(string product, int date)
     {
         return await (from p in _context.Products
@@ -44,22 +44,20 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     }
 
 
-}
 
 
-=======
     //Obtiene todos los proveedores que no han vendido en ultimo año
   public async Task<IEnumerable<Person>> GetSuppliersNoSalesAtYear()
   {
     return new List<Person>();
 
   }
-}
 
+}
 
 /* return await (from p in _context.Products 
                     join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
                     where p.Name.ToUpper() == product.ToUpper()
                     select sp).CountAsync(); */
 
->>>>>>> af3703b5ae04927605a6789fd7ea216d0b63c467
+
