@@ -21,10 +21,10 @@ public class ProductRepository : GenericRepository<Product>, IProduct
     }
 
  // creacion Repositiorio de Medicamentos que caducan antes del 1 de enero de 2024.
-    public async Task<IEnumerable<Product>> GetAllProductExpiredBeforeAsync(DateTime ExpiryDate)
+    public async Task<IEnumerable<Product>> GetAllProductExpiredBeforeAsync(DateTime expiryDate)
     {
         return await _context.Products
-                            .Where(p => p.ExpirationDate.Date < ExpiryDate)
+                            .Where(p => p.ExpirationDate.Date < expiryDate)
                             .ToListAsync();
     }
     //Medicamentos con un precio mayor a 50 y un stock menor a 100.
@@ -41,4 +41,32 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                             .Where(p => !p.SaleProducts.Any())
                             .ToListAsync();
     }
+    //Medicamentos que no han sido vendidos en 2023.
+    public async Task<IEnumerable<Product>> GetAllProductsNotSoldInYearAsync(DateTime year)
+    {
+
+        return await _context.Products
+                            .Where(product =>
+                                !product.SaleProducts.Any(saleProduct =>
+                                    saleProduct.Sale.SaleDate >= year.AddYears(-1) && saleProduct.Sale.SaleDate <= year.Date))
+                                    .ToListAsync();
+    }                      
+    public async Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month)
+    {
+        return await _context.Products
+                            .Where(product =>
+                                product.SaleProducts.Any(saleProduct =>
+                                    saleProduct.Sale.SaleDate.Month == month))
+                                    .ToListAsync();
+    }
+    //Medicamentos comprados al ‘Proveedor A’.
+    public async Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier)
+    {
+        return await _context.Products
+                            .Where(product =>
+                                product.PurchaseProducts.Any(purchaseProduct =>
+                                    purchaseProduct.Purchase.Supplier.Name == supplier ))
+                                    .ToListAsync();
+                            
+    } 
 }

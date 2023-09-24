@@ -146,10 +146,65 @@ public class ProductController : BaseApiController
         var products = await _unitOfWork.Products.GetAllProductsNeverSold();
         if(products == null)
         {
-            return NotFound($"Actualmente todos los productos han tenido ventas ");
+            return NotFound("Actualmente todos los productos han tenido ventas ");
         }
         return _mapper.Map<List<ProductDto>>(products);
     } 
 
+    [HttpGet("GetAllProductsNotSoldAtYear/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
 
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsNotSoldAtYear(DateTime year)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsNotSoldInYearAsync(year);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, // Código de estado HTTP 204 (No Content)
+                Content = $"El el año {year} todos los productos han tenido ventas :D",
+                ContentType = "text/plain" // Tipo de contenido 
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
+
+    [HttpGet("GetAllProductsSoldInMonth/{month}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsSoldInMonth(int month)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsSoldInMonthAsync(month);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, 
+                Content = $"No hay ventas de ningun producto este mes :C",
+                ContentType= "text/Plain"
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
+    [HttpGet("GetAllProductsBySupplier/{supplier}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsBySupplier(string supplier)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsBySupplierAsync(supplier);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, 
+                Content = $"No hay productos relacionados con el proovedor {supplier}",
+                ContentType= "text/Plain"
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
 }
