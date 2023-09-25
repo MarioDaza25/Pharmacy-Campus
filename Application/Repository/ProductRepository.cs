@@ -68,5 +68,15 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                                     purchaseProduct.Purchase.Supplier.Name == supplier ))
                                     .ToListAsync();
                             
+
     } 
+    // public async Task<IEnumerable<Product>> GetContactSupplierInProductAsync() 
+    // {
+    //     return await _context.Products
+    //                         .Include(p => p.Supplier)
+    //                       //  .ProjectTo<ProductDto>(new { Supplier = new ContactSupplierDto() })
+    //                         .ToListAsync();
+    // }
+    // todavia en pruebas
 }
+
