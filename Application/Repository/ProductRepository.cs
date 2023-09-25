@@ -1,8 +1,8 @@
+
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-
 namespace Application.Repository;
 
 public class ProductRepository : GenericRepository<Product>, IProduct
@@ -67,16 +67,25 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                                 product.PurchaseProducts.Any(purchaseProduct =>
                                     purchaseProduct.Purchase.Supplier.Name == supplier ))
                                     .ToListAsync();
-                            
-
     } 
-    // public async Task<IEnumerable<Product>> GetContactSupplierInProductAsync() 
-    // {
-    //     return await _context.Products
-    //                         .Include(p => p.Supplier)
-    //                       //  .ProjectTo<ProductDto>(new { Supplier = new ContactSupplierDto() })
-    //                         .ToListAsync();
-    // }
-    // todavia en pruebas
+    public async Task<IEnumerable<SupplierContact>> GetContactSupplierInProductAsync() 
+    {
+        return await _context.Products
+                            .Include(p => p.Supplier)
+                            .Select(p => new SupplierContact
+                            {
+                                Name = p.Name,
+                                Price = p.Price,
+                                Stock = p.Stock,
+                                ExpirationDate = p.ExpirationDate,
+                                SupplierName = p.Supplier.Name,
+                                Email =  string.Join(", ", p.Supplier.Emails
+                                    .Where(e => e.EmailType.Description.ToUpper() == "TRABAJO")
+                                    .Select(e => e.Description))
+                            })
+                            .ToListAsync();
+    }
+
 }
+
 
