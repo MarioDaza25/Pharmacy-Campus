@@ -13,7 +13,7 @@ public class MappingProfiles : Profile
         CreateMap<Recipe, RecipeDto>().ReverseMap();
         CreateMap<Person, SalePatientProdDto>().ReverseMap();
         CreateMap<Person, SupplierDto>().ReverseMap();
-        CreateMap<Person, ContactSupplierDto>().ReverseMap();
+        CreateMap<SupplierContact, SupplierContactDto>().ReverseMap();
         
         
     }

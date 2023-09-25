@@ -207,4 +207,17 @@ public class ProductController : BaseApiController
         }
         return _mapper.Map<List<ProductDto>>(products);
     }
+    [HttpGet("GetContactSupplierInProduct")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<SupplierContactDto>>> GetContactSupplierInProduct()
+    {
+        var products = await _unitOfWork.Products.GetContactSupplierInProductAsync();
+        if(products == null)
+        {
+            return BadRequest();
+        }
+        return _mapper.Map<List<SupplierContactDto>>(products);
+    }
 }

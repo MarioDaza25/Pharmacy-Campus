@@ -12,4 +12,6 @@ public interface IProduct : IGenericRepository<Product>
     Task<IEnumerable<Product>> GetAllProductsNotSoldInYearAsync(DateTime year);
     Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month);
     Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier);
+     Task<IEnumerable<SupplierContact>> GetContactSupplierInProductAsync();
+    
 }
