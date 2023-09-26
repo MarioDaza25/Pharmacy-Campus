@@ -62,7 +62,6 @@ public class ProductController : BaseApiController
         return Ok(products);
     }
 
-
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -111,5 +110,139 @@ public class ProductController : BaseApiController
         await _unitOfWork.SaveAsync();
 
         return NoContent();
+    }
+
+        // creacion controller de product < 50
+    [HttpGet("GetLessThan/{amount}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetLessThan(int amount)
+    {
+        var products = await _unitOfWork.Products.GetLessThanStockAsync(amount);
+        if(products == null)
+        {
+            return NotFound("No se encontraron productos menores a " + amount );
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
+    // Medicamentos que caducan antes del 1 de enero de 2024.
+    [HttpGet("GetProductsExpired/{expiryDate}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductExpiredBefore(DateTime ExpiryDate)
+    {
+        var products = await _unitOfWork.Products.GetAllProductExpiredBeforeAsync(ExpiryDate);
+        if(products == null)
+        {
+            return NotFound("No se encontraron productos a expirar en la fecha " + ExpiryDate );
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
+    //Medicamentos con un precio mayor a 50 y un stock menor a 100.
+    
+    [HttpGet("GetHighPricedLowStock/{price}/{stock}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetHighPricedLowStock(decimal price, double stock)
+    {
+        var products = await _unitOfWork.Products.GetHighPricedLowStockAsync(price,stock);
+        if(products == null)
+        {
+            return NotFound($"No se encontraron productos con un precio mayor a {price} y un stock menor a  {stock}.");
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+
+    }
+    [HttpGet("GetAllProductsNeverSold")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsNeverSold()
+    {
+        var products = await _unitOfWork.Products.GetAllProductsNeverSold();
+        if(products == null)
+        {
+            return NotFound("Actualmente todos los productos han tenido ventas ");
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    } 
+
+    [HttpGet("GetAllProductsNotSoldAtYear/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsNotSoldAtYear(DateTime year)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsNotSoldInYearAsync(year);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, // Código de estado HTTP 204 (No Content)
+                Content = $"El el año {year} todos los productos han tenido ventas :D",
+                ContentType = "text/plain" // Tipo de contenido 
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
+
+    [HttpGet("GetAllProductsSoldInMonth/{month}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsSoldInMonth(int month)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsSoldInMonthAsync(month);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, 
+                Content = $"No hay ventas de ningun producto este mes :C",
+                ContentType= "text/Plain"
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
+    [HttpGet("GetAllProductsBySupplier/{supplier}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsBySupplier(string supplier)
+    {
+        var products = await _unitOfWork.Products.GetAllProductsBySupplierAsync(supplier);
+        if(products == null)
+        {
+            return new ContentResult
+            {
+                StatusCode = 204, 
+                Content = $"No hay productos relacionados con el proovedor {supplier}",
+                ContentType= "text/Plain"
+            };
+        }
+        return _mapper.Map<List<ProductDto>>(products);
+    }
+    [HttpGet("GetContactSupplierInProduct")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<SupplierContactDto>>> GetContactSupplierInProduct()
+    {
+        var products = await _unitOfWork.Products.GetContactSupplierInProductAsync();
+        if(products == null)
+        {
+            return BadRequest();
+        }
+        return _mapper.Map<List<SupplierContactDto>>(products);
     }
 }
