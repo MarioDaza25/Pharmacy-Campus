@@ -109,7 +109,33 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                             })
                             .ToListAsync();
     }
+    // //Obtener el medicamento menos vendido en 2023.
+    // public async Task<Product> GetLowestSellingProductAsync(DateTime year)
+    // {
+    //     Product ProductoMenosVendido;
+    //     double  valorActual = 0;
+    //     foreach (var Product in _context.Products)
+    //     {
+    //         double stockTotal = Product.Stock;
+    //         double ventasTotales = 0;
+            
+    //         foreach (var saleProduct in Product.SaleProducts)
+    //         {
+    //                 stockTotal += saleProduct.Quantity;
+    //                 ventasTotales = saleProduct.Quantity;
+    //         }
+    //         var porcentaje = ventasTotales / stockTotal * 100; 
 
-}
+    //         if( porcentaje < valorActual )
+    //         valorActual = porcentaje;
+    //         ProductoMenosVendido = Product;
+
+    //     }
+
+    // return await ProductoMenosVendido;
+
+    // }
+
+}   
 
 

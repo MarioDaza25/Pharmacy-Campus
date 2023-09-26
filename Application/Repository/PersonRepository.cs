@@ -137,7 +137,14 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     }
 
 
-
+    //Total de medicamentos vendidos por cada proveedor.
+        public async Task<IEnumerable<Purchase>> GetProductsSoldEachSupplierAsync() 
+        {
+            return await _context.Purchases
+                                .Include(p => p.Supplier.Name)
+                                .Include(p => p.PurchaseProducts.Select(p => p.Product))
+                                .ToListAsync();
+        }
 
 }
 
