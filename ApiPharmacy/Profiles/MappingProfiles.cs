@@ -12,5 +12,9 @@ public class MappingProfiles : Profile
         CreateMap<Recipe, RecipeDto>().ReverseMap();
         CreateMap<Person, SalePatientProdDto>().ReverseMap();
         CreateMap<Person, SupplierDto>().ReverseMap();
+        CreateMap<SalesEmployeeInfo, SalesEmployeDto>().ReverseMap();
+        CreateMap<TotalProductYear, TotalProductDto>().ReverseMap();
+        CreateMap<SpentPatient, SpentPatientDto>().ReverseMap(); 
+        CreateMap<SupplierGain, SupplierGainDto>().ReverseMap();
     }
 }

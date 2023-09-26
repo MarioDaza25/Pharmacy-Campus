@@ -20,6 +20,7 @@ builder.Services.ConfigureCors(); // aplica el cors de serviceExtension
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly()); // aplica automapper
 builder.Services.AddJwt(builder.Configuration); //Aplicacion de JWT
 builder.Services.AddApplicationServices(); // para que aplique el archivo de extensions
+
 builder.Services.AddDbContext<PharmacyContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("ConexMysql");

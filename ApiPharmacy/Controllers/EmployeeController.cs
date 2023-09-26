@@ -17,7 +17,7 @@ public class EmployeeController : BaseApiController
         _mapper = mapper;
     }
 
-    [HttpGet]
+    [HttpGet("{Employee}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get()
@@ -26,15 +26,62 @@ public class EmployeeController : BaseApiController
         return _mapper.Map<List<EmployeeDto>>(employees);
     }
 
-    [HttpGet("sales/{quantity}")]
+
+    [HttpGet("SalesGreaterThan/{quantity}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IEnumerable<SalePatientProdDto>> Get2(int sales)
+    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get1(int quantity)
     {
-    var patients = await _unitOfWork.People.GetSaleEmployee(sales);
-    return _mapper.Map<List<SalePatientProdDto>>(patients);
+        if (quantity < 0)
+        {
+            return BadRequest("La cantidad de ventas debe ser un número positivo.");
+        }
+        var employees = await _unitOfWork.People.GetSaleEmployee(quantity);
+        return _mapper.Map<List<SalePatientProdDto>>(employees);
     } 
 
+    [HttpGet("GetEmployeeSaleYear/{quantity}/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get2(int quantity, int year)
+    {
+        if (quantity < 0)
+        {
+            return BadRequest("La cantidad de ventas debe ser un número positivo.");
+        }
+        var employees = await _unitOfWork.People.GetEmployeeSaleYear(quantity, year);
+        return _mapper.Map<List<SalePatientProdDto>>(employees);
+    } 
+
+
+
+    [HttpGet("GetEmployeeNeverSale/{month}/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get3(int month, int year)
+    {
+        var patients = await _unitOfWork.People.EmployeeNeverSaleMonthYear( month, year);
+        return _mapper.Map<List<SalePatientProdDto>>(patients);
+    } 
+
+    [HttpGet("EmployeeNeverSaleYear/{date}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get4(int date)
+    {
+        var employees = await _unitOfWork.People.EmployeeNeverSaleYear(date);
+        return _mapper.Map<List<SalePatientProdDto>>(employees);
+    }
+
+
+    [HttpGet("CountAllSalesEmployees/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SalesEmployeDto>>> Get5(int year)
+    {
+        var employees = await _unitOfWork.People.CountAllSalesEmployees(year);
+        return _mapper.Map<List<SalesEmployeDto>>(employees);
+    }
 
 
     [HttpGet("{id}")]
@@ -67,7 +114,7 @@ public class EmployeeController : BaseApiController
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<EmployeeDto>> Put(int id, [FromBody] EmployeeDto employeeDto)
+    public async Task<ActionResult<EmployeeDto>> Put([FromBody] EmployeeDto employeeDto)
     {
         if (employeeDto == null)
         {
