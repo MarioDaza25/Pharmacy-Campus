@@ -14,5 +14,9 @@ namespace ApiPharmacy.Dtos
         public string Name { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public int Employee_Fk { get; set; }
+
+
     }
 }

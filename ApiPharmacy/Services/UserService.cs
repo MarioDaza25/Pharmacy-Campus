@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ApiPharmacy.Services;
 //pasos para la creacion de los metodos necesarios para el uso de JWT
-public class UserService
+public class UserService :IUserService
 {   
     //crear los atributos y el conectarlos con el constructor
     public readonly JWT _jwt;
@@ -43,13 +43,13 @@ public class UserService
         //si no existe le asigna un rol a la instancia usuario
         if (existingUser == null)
         {
-            var roleDefault = _unitOfWork.JobTitles//=> Roles
+            /* var roleDefault = _unitOfWork.JobTitles//=> Roles
                                         .Find(u => u.Description == Authorization.rol_default.ToString())
-                                        .First();
+                                        .First(); */
             try
             {
                 //si no existe, se hace la persistencia de la entidad
-                user.JobsTitle.Add(roleDefault);
+               /*  user.JobsTitle.Add(roleDefault); */
                 _unitOfWork.Users.Add(user);
                 await _unitOfWork.SaveAsync();
 
