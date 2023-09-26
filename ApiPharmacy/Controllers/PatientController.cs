@@ -35,5 +35,23 @@ public class PatientController : BaseApiController
     return _mapper.Map<List<SalePatientProdDto>>(patients);
     }
 
+    [HttpGet("GetPatientsNeverBuy/{date}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get2(int date)
+    {
+        var patients = await _unitOfWork.People.GetPatientsNeverBuy(date);
+        return _mapper.Map<List<SalePatientProdDto>>(patients);
+    }
+
+
+    [HttpGet("TotalSpentPatient/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<SpentPatientDto>>> Get3(int year)
+    {
+        var patients = await _unitOfWork.People.TotalSpentPatient(year);
+        return _mapper.Map<List<SpentPatientDto>>(patients);
+    }
     
 }

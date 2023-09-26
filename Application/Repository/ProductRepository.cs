@@ -13,6 +13,30 @@ public class ProductRepository : GenericRepository<Product>, IProduct
         _context = context;
     }
 
+    //Total de medicamentos vendidos en el trimestre (X) del Año (X). 
+    public async Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim)
+    {
+        int month = (trim - 1) * 3 + 1;
+        
+        return await _context.SaleProducts
+        .Where(sp => sp.Sale.SaleDate.Year == year && sp.Sale.SaleDate.Month >= month 
+        && sp.Sale.SaleDate.Month <= month + 2)
+        .GroupBy(sp => sp.Product.Name) 
+        .Select(group => new TotalProductYear
+        {
+            Product = group.Key,
+            Quantity = group.Sum(sp => sp.Quantity)
+        })
+        .ToListAsync();
+    }
+
+    //Cantidad total de dinero recaudado por las ventas de medicamentos
+    public async Task<decimal> GetTotalGain()
+    {
+        return await _context.SaleProducts.SumAsync(sp => sp.Price);
+
+    }
+
     public async Task<IEnumerable<Product>> GetLessThanStockAsync(int amount)
     {
         return await _context.Products
@@ -85,7 +109,33 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                             })
                             .ToListAsync();
     }
+    // //Obtener el medicamento menos vendido en 2023.
+    // public async Task<Product> GetLowestSellingProductAsync(DateTime year)
+    // {
+    //     Product ProductoMenosVendido;
+    //     double  valorActual = 0;
+    //     foreach (var Product in _context.Products)
+    //     {
+    //         double stockTotal = Product.Stock;
+    //         double ventasTotales = 0;
+            
+    //         foreach (var saleProduct in Product.SaleProducts)
+    //         {
+    //                 stockTotal += saleProduct.Quantity;
+    //                 ventasTotales = saleProduct.Quantity;
+    //         }
+    //         var porcentaje = ventasTotales / stockTotal * 100; 
 
-}
+    //         if( porcentaje < valorActual )
+    //         valorActual = porcentaje;
+    //         ProductoMenosVendido = Product;
+
+    //     }
+
+    // return await ProductoMenosVendido;
+
+    // }
+
+}   
 
 
