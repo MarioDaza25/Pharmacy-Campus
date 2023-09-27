@@ -8,14 +8,33 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
+        CreateMap<Role, RoleDto>().ReverseMap();
+        CreateMap<PersonType, TypePDto>().ReverseMap();
+        CreateMap<JobTitle, JobTitleDto>().ReverseMap();
+        CreateMap<IdentificationType, TypeIdenDto>().ReverseMap();
+        CreateMap<Email, EmailDto>().ReverseMap();
+        
         CreateMap<Person, EmployeeDto>().ReverseMap();
-        CreateMap<Product,ProductDto>().ReverseMap();
-        CreateMap<Recipe, RecipeDto>().ReverseMap();
-        CreateMap<Person, SalePatientProdDto>().ReverseMap();
-        CreateMap<Person, SupplierDto>().ReverseMap();
         CreateMap<SalesEmployeeInfo, SalesEmployeDto>().ReverseMap();
-        CreateMap<TotalProductYear, TotalProductDto>().ReverseMap();
+        CreateMap<RecipeProduct, ProductRecipeDto>().ReverseMap();
+        
+        CreateMap<Person, PatientDto>().ReverseMap();
+        CreateMap<Person, DoctorDto>().ReverseMap();
         CreateMap<SpentPatient, SpentPatientDto>().ReverseMap(); 
+
+        CreateMap<Recipe, RecipeDto>().ReverseMap();
+        CreateMap<Product, ProductNameDto>().ReverseMap();
+
+        CreateMap<Person, SupplierDto>().ReverseMap();
+        CreateMap<Person, PatientRecipeDto>().ReverseMap();
+
+        CreateMap<Person, SupplierContactDto>().ReverseMap();
+
+        CreateMap<Product,ProductDto>().ReverseMap();
+        CreateMap<Product, ProductSupplierDto>().ReverseMap();
+
+        
+        CreateMap<TotalProductYear, TotalProductDto>().ReverseMap();
         CreateMap<SupplierGain, SupplierGainDto>().ReverseMap();
         CreateMap<SupplierContact, SupplierContactDto>().ReverseMap();
         CreateMap<Purchase, PurchaseDto>().ReverseMap();

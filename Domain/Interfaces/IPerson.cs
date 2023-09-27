@@ -4,11 +4,13 @@ namespace Domain.Interfaces;
 
 public interface IPerson : IGenericRepository<Person>
 {
-    Task<IEnumerable<Person>> GetSalePatientProduct(string product);
-
-    Task<IEnumerable<Person>> GetSalePatientProductYear(string product, int date);
+    Task<IEnumerable<Person>> GetPurchasePatientProduct(string product);
+    Task<IEnumerable<Person>> GetPurchasePatientProductYear(string product, int date);
     Task<IEnumerable<Person>> GetPatientsNeverBuy(int date);
     Task<IEnumerable<SpentPatient>> TotalSpentPatient(int year);
+    Task<IEnumerable<Person>> GetAllEmpoyeesAsync();
+    Task<IEnumerable<Person>> GetAllPatientAsync();
+    Task<IEnumerable<Person>> GetAllSupplierAsync();
     Task<IEnumerable<Person>> GetSaleEmployee(int sales); 
     Task<IEnumerable<Person>> EmployeeNeverSaleMonthYear(int month, int year);
     Task<IEnumerable<Person>> EmployeeNeverSaleYear(int year);
