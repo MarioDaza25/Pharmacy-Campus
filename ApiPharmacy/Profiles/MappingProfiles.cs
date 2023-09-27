@@ -18,5 +18,9 @@ public class MappingProfiles : Profile
         CreateMap<SpentPatient, SpentPatientDto>().ReverseMap(); 
         CreateMap<SupplierGain, SupplierGainDto>().ReverseMap();
         CreateMap<SupplierContact, SupplierContactDto>().ReverseMap();
+        CreateMap<Purchase, PurchaseDto>().ReverseMap();
+        CreateMap<Role, RoleDto>().ReverseMap();
+          CreateMap<Person, SupplierPurchasesDto>().ReverseMap();
+
     }
 }

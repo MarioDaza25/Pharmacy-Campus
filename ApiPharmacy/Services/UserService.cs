@@ -4,56 +4,51 @@ using System.Security.Cryptography;
 using System.Text;
 using ApiPharmacy.Dtos;
 using ApiPharmacy.Helpers;
+using ApiPharmacy.Services;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-
-namespace ApiPharmacy.Services;
-//pasos para la creacion de los metodos necesarios para el uso de JWT
-public class UserService :IUserService
-{   
-    //crear los atributos y el conectarlos con el constructor
-    public readonly JWT _jwt;
-    public readonly IUnitOfWork _unitOfWork;
-    public readonly IPasswordHasher<User> _passwordHasher;
-
+namespace API.Services
+{
+    public class UserService: IUserService
+{
+    private readonly JWT _jwt;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPasswordHasher<User> _passwordHasher;
     public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IPasswordHasher<User> passwordHasher)
     {
         _jwt = jwt.Value;
         _unitOfWork = unitOfWork;
         _passwordHasher = passwordHasher;
     }
-    //creacion del primer metodo (register)
     public async Task<string> RegisterAsync(RegisterDto registerDto)
     {
-        //crear una instancia de usuario y hacer el mapping
         var user = new User
         {
             Email = registerDto.Email,
             Username = registerDto.Name
         };
-        // pasar la contraseña hasheada a la instacia de usuario
-        user.Password = _passwordHasher.HashPassword(user, registerDto.Password); //aqui sucede el hasheo o la encriptacion
-        // vericar que la instacia usuario y sus atributos existan
+
+        user.Password = _passwordHasher.HashPassword(user, registerDto.Password); //Encrypt password
+
         var existingUser = _unitOfWork.Users
                                     .Find(u => u.Username.ToLower() == registerDto.Name.ToLower())
                                     .FirstOrDefault();
-        //si no existe le asigna un rol a la instancia usuario
+
         if (existingUser == null)
         {
-            /* var roleDefault = _unitOfWork.JobTitles//=> Roles
-                                        .Find(u => u.Description == Authorization.rol_default.ToString())
-                                        .First(); */
+            /* var rolDefault = _unitOfWork.Roles
+                                    .Find(u => u.Nombre == Authorization.rol_default.ToString())
+                                    .First(); */
             try
             {
-                //si no existe, se hace la persistencia de la entidad
-               /*  user.JobsTitle.Add(roleDefault); */
-                _unitOfWork.Users.Add(user);
+/*                 user.Rols.Add(rolDefault);
+ */                _unitOfWork.Users.Add(user);
                 await _unitOfWork.SaveAsync();
 
-                return $"User {registerDto.Name} has been registered succesfully";
+                return $"User  {registerDto.Name} has been registered successfully";
             }
             catch (Exception ex)
             {
@@ -63,85 +58,58 @@ public class UserService :IUserService
         }
         else
         {
-            return $"User {registerDto.Name} Already registered.";
+            return $"User {registerDto.Name} already registered.";
         }
-
     }
+    public async Task<DataUserDto> GetTokenAsync(LoginDto model)
+    {
+        DataUserDto dataUserDto = new DataUserDto();
+        var user = await _unitOfWork.Users
+                    .GetByUsernameAsync(model.Name);
 
-        public async Task<DataUserDto> GetTokenAsync(LoginDto model)
+        if (user == null)
         {
-            //crear la instacia principal del metodo
-            DataUserDto dataUserDto = new DataUserDto();
-            //obtener el usuario vinculado al token
-            var user  = await _unitOfWork.Users
-                                .GetByUsernameAsync(model.Name);
-            
-            //verificar si el usuario esta autenticado
-            if(user == null)
-            {
-                dataUserDto.IsAuthenticated = false;
-                dataUserDto.Message = $"User does not exist with username {model.Name}";
-                return dataUserDto;
-            }
-            // compara la contraseña hasheada y guardada en la base de datos, con la que pasa el usuario en el login
-            var result = _passwordHasher.VerifyHashedPassword(user, user.Password,model.Password);
-            // si la contraseña es igual a la almacenada en la bd, se crea un token unico, y se llenan los atributos para datauserdto
-            if(result == PasswordVerificationResult.Success)
-            {
-                dataUserDto.IsAuthenticated = true;
-                JwtSecurityToken jwtSecurityToken = CreateJwtToken(user);
-            
-                dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-                dataUserDto.Email = user.Email;
-                dataUserDto.Name = user.Username;
-                dataUserDto.JobTitle = user.JobsTitle
-                                        .Select(u => u.Description)
-                                       .ToList();
-
-                //si el usuario tiene algun refreshtoken activo, lo guarda y lo pasa a los datos de usario                   
-                if(user.RefreshTokens.Any(a => a.IsActive))
-                {
-                    var activeRefreshToken = user.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
-                    dataUserDto.RefreshToken = activeRefreshToken.Token;
-                    //le pasa la fecha de expiracion real del refresh token a los datos de usuario
-                    dataUserDto.RefreshTokenExpiration = activeRefreshToken.Expires;
-                }  
-                else
-                {
-                    //si no hay ningun token activo lo crea y le hace la persistencia en la unidad de trabajo
-                    var refreshToken = CreateRefreshToken();
-                    dataUserDto.RefreshToken = refreshToken.Token;
-                    dataUserDto.RefreshTokenExpiration = refreshToken.Expires;
-                    user.RefreshTokens.Add(refreshToken);
-                    _unitOfWork.Users.Update(user);
-                    await _unitOfWork.SaveAsync();
-                }                 
-
-                return dataUserDto;
-            }
-            // si el hasheo no conincide, lanza este mensaje
             dataUserDto.IsAuthenticated = false;
-            dataUserDto.Message = $"Credenciales incorrectas para el usuario{user.Username}";
+            dataUserDto.Message = $"User does not exist with username {model.Name}.";
             return dataUserDto;
         }
 
-        private RefreshToken CreateRefreshToken()
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, model.Password);
+
+        if (result == PasswordVerificationResult.Success)
         {
-            // crea un numero aleatorio de 32 bytes
-            var randomNumber = new byte[32];
-            using (var generator = RandomNumberGenerator.Create())
+            dataUserDto.IsAuthenticated = true;
+            JwtSecurityToken jwtSecurityToken = CreateJwtToken(user);
+            dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            dataUserDto.Email = user.Email;
+            dataUserDto.Name = user.Username;
+            dataUserDto.JobsTitle = user.JobsTitle
+                                            .Select(u => u.Description)
+                                            .ToList();
+
+            if (user.RefreshTokens.Any(a => a.IsActive))
             {
-                generator.GetBytes(randomNumber);
-                //Llena los atributos de la instacia refresh y lo devuelve 
-                return new RefreshToken
-                {
-                    Token = Convert.ToBase64String(randomNumber),
-                    Expires = DateTime.UtcNow.AddDays(10),
-                    Created = DateTime.UtcNow
-                };
+                var activeRefreshToken = user.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
+                dataUserDto.RefreshToken = activeRefreshToken.Token;
+                dataUserDto.RefreshTokenExpiration = activeRefreshToken.Expires;
             }
+            else
+            {
+                var refreshToken = CreateRefreshToken();
+                dataUserDto.RefreshToken = refreshToken.Token;
+                dataUserDto.RefreshTokenExpiration = refreshToken.Expires;
+                user.RefreshTokens.Add(refreshToken);
+                _unitOfWork.Users.Update(user);
+                await _unitOfWork.SaveAsync();
+            }
+
+            return dataUserDto;
         }
-        public async Task<string> AddRoleAsync(AddRoleDto model)
+        dataUserDto.IsAuthenticated = false;
+        dataUserDto.Message = $"Credenciales incorrectas para el usuario {user.Username}.";
+        return dataUserDto;
+    }
+    public async Task<string> AddRoleAsync(AddRoleDto model)
     {
 
         var user = await _unitOfWork.Users
@@ -213,20 +181,34 @@ public class UserService :IUserService
         dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         dataUserDto.Email = usuario.Email;
         dataUserDto.Name = usuario.Username;
-        dataUserDto.JobTitle = usuario.JobsTitle
+        dataUserDto.JobsTitle = usuario.JobsTitle
                                         .Select(u => u.Description)
                                         .ToList();
         dataUserDto.RefreshToken = newRefreshToken.Token;
         dataUserDto.RefreshTokenExpiration = newRefreshToken.Expires;
         return dataUserDto;
     }
-     private JwtSecurityToken CreateJwtToken(User usuario)
+    private RefreshToken CreateRefreshToken()
     {
-        var jobsTitle = usuario.JobsTitle;
-        var roleClaims = new List<Claim>();
-        foreach (var jobTitle in jobsTitle)
+        var randomNumber = new byte[32];
+        using (var generator = RandomNumberGenerator.Create())
         {
-            roleClaims.Add(new Claim("roles", jobTitle.Description));
+            generator.GetBytes(randomNumber);
+            return new RefreshToken
+            {
+                Token = Convert.ToBase64String(randomNumber),
+                Expires = DateTime.UtcNow.AddDays(10),
+                Created = DateTime.UtcNow
+            };
+        }
+    }
+    private JwtSecurityToken CreateJwtToken(User usuario)
+    {
+        var roles = usuario.JobsTitle;
+        var roleClaims = new List<Claim>();
+        foreach (var role in roles)
+        {
+            roleClaims.Add(new Claim("roles", role.Description));
         }
         var claims = new[]
         {
@@ -246,6 +228,5 @@ public class UserService :IUserService
             signingCredentials: signingCredentials);
         return jwtSecurityToken;
     }
-
-
+    }
 }

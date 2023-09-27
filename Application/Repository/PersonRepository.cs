@@ -137,14 +137,28 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     }
 
 
-    //Total de medicamentos vendidos por cada proveedor.
-        public async Task<IEnumerable<Purchase>> GetProductsSoldEachSupplierAsync() 
+
+        // //Total de medicamentos vendidos por cada proveedor.
+        public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
         {
-            return await _context.Purchases
-                                .Include(p => p.Supplier.Name)
-                                .Include(p => p.PurchaseProducts.Select(p => p.Product))
+
+            return await _context.People
+                                .Where(p => p.Role.Description.ToUpper() == "Supplier" )
+                                .Include(p => p.Role)
+                                .Include(p => p.Purchases)
+                                .ThenInclude(ps => ps.PurchaseProducts)
+                                .ThenInclude(pp => pp.Product)
                                 .ToListAsync();
         }
+        //Total de medicamentos vendidos por cada proveedor.
+        // public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+        // {
+
+        //     return await _context.People
+        //                         .Include(p => p.Purchases)
+        //                         .ToListAsync();                                
+        // }
+
 
 }
 

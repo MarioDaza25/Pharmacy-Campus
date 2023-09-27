@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ApiPharmacy.Services;
+using API.Services;
 namespace ApiPharmacy.Extensions;
 public static class ApplicationServiceExtension
 {
