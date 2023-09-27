@@ -13,8 +13,8 @@ public class SaleRepository : GenericRepository<Sale>, ISale
         _context = context;
     }
 
-    //Total de ventas del medicamento (X)
-    public async Task<decimal> GetSaleProductCount(string product)
+    //Total de ventas del medicamento (X) (OK)
+    public async Task<decimal> GetTotalSaleProduct(string product)
     {
         var saleProducts = await _context.SaleProducts
         .Where(sp => sp.Product.Name.ToUpper() == product.ToUpper())
@@ -25,5 +25,4 @@ public class SaleRepository : GenericRepository<Sale>, ISale
 
         return totalSales;
     }
-
 }
