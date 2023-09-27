@@ -2,5 +2,5 @@ namespace ApiPharmacy.Dtos;
 
 public class TotalSaleProductDto
 {
-    public string TotalSales { get; set; }
+    public decimal TotalSales { get; set; }
 }
