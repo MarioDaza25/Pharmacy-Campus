@@ -19,15 +19,17 @@ public class SupplierController : BaseApiController
     _mapper = mapper;
   }
 
+  //Obterner Todos los Proveedores
   [HttpGet]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   public async Task<ActionResult<IEnumerable<SupplierDto>>> Get()
   {
-    var suppliers = await _unitOfWork.People.GetAllAsync();
+    var suppliers = await _unitOfWork.People.GetAllSupplierAsync();
     return _mapper.Map<List<SupplierDto>>(suppliers);
   }
 
+  //Ganancia total por proveedor en el Año (X)
   [HttpGet("TotalSupplierGain/{year}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -37,14 +39,16 @@ public class SupplierController : BaseApiController
     return _mapper.Map<List<SupplierGainDto>>(suppliers);
   }
 
-  [HttpGet("GetSupplierNeverSell/{date}")]
+  //Proveedores  que no han vendido ningún medicamento en Un año Especifico
+  [HttpGet("NeverSell/{date}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get3(int date)
+  public async Task<ActionResult<IEnumerable<SupplierDto>>> Get3(int date)
   {
       var patients = await _unitOfWork.People.GetSupplierNeverSell(date);
-      return _mapper.Map<List<SalePatientProdDto>>(patients);
+      return _mapper.Map<List<SupplierDto>>(patients);
   }
+
 
   [HttpGet("{id}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
