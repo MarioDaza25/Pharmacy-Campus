@@ -160,7 +160,47 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         // }
 
 
-}
+        //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
+        // public async Task<IEnumerable<Product>> GetMajorSoldDfProductsInEmployeeAsync()
+        // {
+        //     // return await _context.People
+            //                     .Where(person => person.Role.Description.ToUpper() == "Employee")
+            //                     .Where(person =>  
+            //                     {
+            //                         Person EmployeeWithMayorSoldProductDF;
+            //                         int valorActual = 0;
+            //                         foreach (var saleEmp in person.SalesEmp)
+            //                         {
+            //                             foreach (var saleProduct in saleEmp.SaleProducts)
+            //                             {
+            //                                 int coincidencias = 0;
+            //                                 for (int i = 0; i < saleEmp.SaleProducts.Count(); i++)
+            //                                 {
+            //                                     if (saleProduct.Product_Fk !=  saleEmp.SaleProducts.ToList()[i].Product_Fk)
+            //                                     {
+            //                                         coincidencias++;
+            //                                     }
+            //                                 }
+
+            //                                 if(coincidencias > valorActual)
+            //                                 {
+            //                                     valorActual = coincidencias;
+            //                                     EmployeeWithMayorSoldProductDF = person;
+            //                                 }
+            //                             }
+            //                         }
+            //                     });
+                // return _context.People
+                // .Select(p => p.SalesEmp)
+                // .Where(saleEmp => saleEmp.SaleDate.Year == 2023)  // Filtrar por ventas en 2023
+                // .GroupBy(saleEmp => saleEmp.Employee)  // Agrupar por empleado
+                // .OrderByDescending(group => group.SelectMany(saleEmp => saleEmp.SaleProducts.Select(saleProduct => saleProduct.Product_Fk)).Distinct().Count())
+                // .Select(group => group.Key)
+                // .FirstOrDefault();
+
+        }
+
+
 
 
 

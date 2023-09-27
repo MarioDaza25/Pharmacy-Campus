@@ -1,6 +1,7 @@
 using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
@@ -18,6 +19,7 @@ public class PatientController : BaseApiController
 
 
     [HttpGet("{product}")]
+    //[Authorize(Roles = "Employee")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
      public async Task<IEnumerable<SalePatientProdDto>> Get(string product)
