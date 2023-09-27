@@ -579,14 +579,14 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("email");
 
-                    b.Property<int>("Employee_Fk")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar")
                         .HasColumnName("password");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -596,7 +596,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Employee_Fk");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("User", (string)null);
                 });
@@ -879,13 +879,9 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.Person", "Employee")
+                    b.HasOne("Domain.Entities.Person", null)
                         .WithMany("Users")
-                        .HasForeignKey("Employee_Fk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
+                        .HasForeignKey("PersonId");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserRole", b =>

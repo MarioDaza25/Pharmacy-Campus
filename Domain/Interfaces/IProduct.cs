@@ -1,5 +1,4 @@
 using Domain.Entities;
-
 namespace Domain.Interfaces;
 
 public interface IProduct : IGenericRepository<Product>
@@ -13,6 +12,7 @@ public interface IProduct : IGenericRepository<Product>
   Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month);
   Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier);
   Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim);
+  //Task<Product> GetLowestSellingProductAsync();
   Task<decimal> GetTotalGain();
 
 }

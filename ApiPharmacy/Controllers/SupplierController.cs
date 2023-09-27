@@ -109,4 +109,12 @@ public class SupplierController : BaseApiController
     return NoContent();
   }
 
+    [HttpGet("GetProductsSoldEachSupplier")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+     public async Task<IEnumerable<SupplierPurchasesDto>> GetProductsSoldEachSupplier()
+     {
+        var suppliers = await _unitOfWork.People.GetProductsSoldEachSupplierAsync();
+        return _mapper.Map<List<SupplierPurchasesDto>>(suppliers);
+     }
 }
