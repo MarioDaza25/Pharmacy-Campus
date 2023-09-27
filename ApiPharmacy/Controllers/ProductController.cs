@@ -27,6 +27,31 @@ public class ProductController : BaseApiController
         return _mapper.Map<List<ProductDto>>(products);
     }
 
+    [HttpGet("AllSalesQuarter/{year}/{trim}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<TotalProductYear>>> Get2(int year, int trim)
+    {
+        var products = await _unitOfWork.Products.AllSalesQuarter(year, trim);
+        return _mapper.Map<List<TotalProductYear>>(products);
+    }
+
+
+    [HttpGet("TotalProductsGain")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Get3()
+    {
+        var total = await _unitOfWork.Products.GetTotalGain();
+
+        var dto = new TotalProductsGainDto
+        {
+            TotalGain = total
+        };
+
+        return Ok(dto);
+    }
+
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -220,4 +245,21 @@ public class ProductController : BaseApiController
         }
         return _mapper.Map<List<SupplierContactDto>>(products);
     }
+
+    // [HttpGet("GetLowestSellingProduct")]
+    // [ProducesResponseType(StatusCodes.Status200OK)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(StatusCodes.Status404NotFound)]
+    // public async Task<ActionResult<ProductDto>> GetContactSupplier()
+    // {
+    //     var products = await _unitOfWork.Products.GetLowestSellingProductAsync();
+    //     if(products == null)
+    //     {
+    //         return BadRequest();
+    //     }
+    //     return _mapper.Map<ProductDto>(products);
+    // }
+    
+
+
 }

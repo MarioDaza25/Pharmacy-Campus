@@ -13,51 +13,154 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         _context = context;
     }
 
+    public override async Task<IEnumerable<Person>> GetAllAsync()
+    {
+        return await _context.People
+                .Where(p => p.Role.Description.ToUpper() == "EMPLEADO")
+                .ToListAsync();
+    }
+
+    //Pacientes que han comprado un producto especifico
     public async Task<IEnumerable<Person>> GetSalePatientProduct(string product)
     {
-        return await (from p in _context.Products
-                        join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
-                        join s in _context.Sales on sp.Sale_Fk equals s.Id
-                        join pat in _context.People on s.Patient_Fk equals pat.Id
-                        where p.Name.ToUpper() == product.ToUpper()
-                        select pat).ToListAsync();
+        return await _context.People
+        .Where(p => p.Role.Description.ToUpper() == "PACIENTE" &&
+            p.SalesPat.Any(s => s.SaleProducts.Any(sp => sp.Product.Name.ToUpper() == product.ToUpper())))
+        .ToListAsync();
     }
 
 
-    public async Task<IEnumerable<Person>> GetSalePatientProductYear(string product, int date)
+    //Pacientes que compraron un "producto" en un "año" especifico
+    public async Task<IEnumerable<Person>> GetSalePatientProductYear(string product, int year)
     {
-        return await (from p in _context.Products
-                        join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
-                        join s in _context.Sales on sp.Sale_Fk equals s.Id
-                        join pat in _context.People on s.Patient_Fk equals pat.Id
-                        where p.Name.ToUpper() == product.ToUpper() && s.SaleDate.Year == date
-                        select pat).ToListAsync();
+        return await _context.People
+        .Where(p => p.Role.Description.ToUpper() == "PACIENTE" &&
+            p.SalesPat.Any(s => s.SaleProducts.Any(sp => sp.Product.Name.ToUpper() == product.ToUpper() && s.SaleDate.Year == year)))
+        .ToListAsync();
     }
 
+    //Pacientes que no han comprado ningún medicamento en Un año Especifico
+    public async Task<IEnumerable<Person>> GetPatientsNeverBuy(int year)
+    {
+        return await _context.People
+            .Where(p => p.Role.Description.ToUpper() == "PACIENTE" &&
+                (!p.SalesPat.Any(s => s.SaleDate.Year == year)))
+            .ToListAsync();
+    }
+    
+    //Total gastado por cada paciente en el Año (X)
+    public async Task<IEnumerable<SpentPatient>> TotalSpentPatient(int year)
+    {
+        return await _context.SaleProducts
+        .Where(sp => sp.Sale.SaleDate.Year == year)
+        .GroupBy(sp => sp.Sale.Patient.Name) 
+        .Select(group => new SpentPatient
+        {
+            Name = group.Key,
+            TotalSpent = group.Sum(sp => sp.Price)
+        })
+        .ToListAsync();
+    }
+
+
+
+    //Empleados que hayan hecho más de N ventas en total.
     public async Task<IEnumerable<Person>> GetSaleEmployee(int sales)
     {
-        var result = await _context.People
-            .Where(p => _context.Sales.Count(s => s.Employee_Fk == p.Id) > sales)
-            .ToListAsync();
+        return await _context.People
+                    .Where(p => p.SalesEmp.Count() > sales)
+                    .ToListAsync();
+    }
 
-        return result;
+
+    //Empleados que Realizaron menos de (N) Ventas el Año (N).
+    public async Task<IEnumerable<Person>> GetEmployeeSaleYear(int sales, int year)
+    {
+        return await _context.People
+                    .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                     p.SalesEmp.Count(s => s.SaleDate.Year == year) < sales)
+                    .ToListAsync();
+    }
+
+    //Empleados que no realizaron ventas en (N) Mes y (N) Año.
+    public async Task<IEnumerable<Person>> EmployeeNeverSaleMonthYear(int month, int year)
+    {
+        return await _context.People
+                    .Where(p => p.Role.Description.ToUpper() == "EMPLEADO"
+                    && (!p.SalesEmp.Any(s => s.SaleDate.Month == month &&  s.SaleDate.Year == year )))
+                    .ToListAsync();
+    }
+
+    //Empleados que no han realizado ninguna venta en el Año (N)
+    public async Task<IEnumerable<Person>> EmployeeNeverSaleYear(int year)
+    {
+        return await _context.People
+            .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                (!p.SalesEmp.Any(s => s.SaleDate.Year == year)))
+            .ToListAsync();
+    }
+
+    //Cantidad de ventas realizadas por cada empleado en Año (X)
+    public async Task<IEnumerable<SalesEmployeeInfo>> CountAllSalesEmployees(int year)
+    {
+        return  await _context.People
+                .Where(p => p.Role.Description.ToUpper() == "EMPLEADO")
+                .Select(employee => new SalesEmployeeInfo
+                {
+                    Name = employee.Name,
+                    TotalSales = employee.SalesEmp.Count(s => s.SaleDate.Year == year)
+                })
+                .ToListAsync();
+    }
+
+    //Ganancia total por proveedor en el Año (X)
+    public async Task<IEnumerable<SupplierGain>> TotalSupplierGain(int year)
+    {
+        return await _context.PurchasesProducts
+        .Where(sp => sp.Purchase.PurchaseDate.Year == year)
+        .GroupBy(sp => sp.Purchase.Supplier.Name) 
+        .Select(group => new SupplierGain
+        {
+            Supplier = group.Key,
+            TotalGain = Math.Round(group.Sum(sp => sp.Price * sp.Quantity))
+        })
+        .ToListAsync();
+    }
+
+    //Proveedores  que no han vendido ningún medicamento en Un año Especifico
+    public async Task<IEnumerable<Person>> GetSupplierNeverSell(int year)
+    {
+        return await _context.People
+            .Where(p => p.Role.Description.ToUpper() == "PROVEEDOR" &&
+                (!p.Purchases.Any(s => s.PurchaseDate.Year == year)))
+            .ToListAsync();
     }
 
 
 
+        // //Total de medicamentos vendidos por cada proveedor.
+        public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+        {
 
-    //Obtiene todos los proveedores que no han vendido en ultimo año
-  public async Task<IEnumerable<Person>> GetSuppliersNoSalesAtYear()
-  {
-    return new List<Person>();
+            return await _context.People
+                                .Where(p => p.Role.Description.ToUpper() == "Supplier" )
+                                .Include(p => p.Role)
+                                .Include(p => p.Purchases)
+                                .ThenInclude(ps => ps.PurchaseProducts)
+                                .ThenInclude(pp => pp.Product)
+                                .ToListAsync();
+        }
+        //Total de medicamentos vendidos por cada proveedor.
+        // public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+        // {
 
-  }
+        //     return await _context.People
+        //                         .Include(p => p.Purchases)
+        //                         .ToListAsync();                                
+        // }
+
 
 }
 
-/* return await (from p in _context.Products 
-                    join sp in _context.SaleProducts on p.Id equals sp.Product_Fk
-                    where p.Name.ToUpper() == product.ToUpper()
-                    select sp).CountAsync(); */
 
 

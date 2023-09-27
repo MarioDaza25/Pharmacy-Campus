@@ -25,9 +25,9 @@ public class SalesController : BaseApiController
     {
         var count = await _unitOfWork.Sales.GetSaleProductCount(product);
 
-        var dto = new SaleProductCountDto
+        var dto = new TotalSaleProductDto
         {
-            Quantity = count
+            TotalSales = $"$ {count}"
         };
 
         return Ok(dto);

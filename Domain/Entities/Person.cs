@@ -8,7 +8,7 @@ public class Person : BaseEntity
   public string Name { get; set; }
   public int PersonType_Fk { get; set; }
   public PersonType PersonType { get; set; }
-  public int Role_Fk { get; set; }
+  public int Role_Fk { get; set; }// employee
   public Role Role { get; set; }
   public int JobTitle_Fk { get; set; }
   public JobTitle JobTitle { get; set; }
