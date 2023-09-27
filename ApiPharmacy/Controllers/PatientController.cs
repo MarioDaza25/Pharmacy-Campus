@@ -1,5 +1,6 @@
 using ApiPharmacy.Dtos;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,35 +17,47 @@ public class PatientController : BaseApiController
         _mapper = mapper;
     }
 
-
-    [HttpGet("{product}")]
+    //Obtener todos los Pacientes 
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-     public async Task<IEnumerable<SalePatientProdDto>> Get(string product)
-     {
-        var patients = await _unitOfWork.People.GetSalePatientProduct(product);
-        return _mapper.Map<List<SalePatientProdDto>>(patients);
-     }
-
-    [HttpGet("{product}/{date}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IEnumerable<SalePatientProdDto>> Get2(string product, int date)
+    public async Task<ActionResult<IEnumerable<PatientDto>>> Get()
     {
-    var patients = await _unitOfWork.People.GetSalePatientProductYear(product, date);
-    return _mapper.Map<List<SalePatientProdDto>>(patients);
+        var suppliers = await _unitOfWork.People.GetAllPatientAsync();
+        return _mapper.Map<List<PatientDto>>(suppliers);
     }
 
-    [HttpGet("GetPatientsNeverBuy/{date}")]
+    //Pacientes que han comprado un producto especifico
+    [HttpGet("PurchaseProduct/{product}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<SalePatientProdDto>>> Get2(int date)
+    public async Task<IEnumerable<PatientDto>> Get(string product)
+    {
+    var patients = await _unitOfWork.People.GetPurchasePatientProduct(product);
+    return _mapper.Map<List<PatientDto>>(patients);
+    }
+
+    //Pacientes que compraron un producto (X) en el Año (X) 
+    [HttpGet("PurchaseProductYear/{product}/{date}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<PatientDto>> Get2(string product, int date)
+    {
+        var patients = await _unitOfWork.People.GetPurchasePatientProductYear(product, date);
+        return _mapper.Map<List<PatientDto>>(patients);
+    }
+
+    //Pacientes que no han comprado ningún medicamento en el año (X)
+    [HttpGet("NeverBuy/{date}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<PatientDto>>> Get2(int date)
     {
         var patients = await _unitOfWork.People.GetPatientsNeverBuy(date);
-        return _mapper.Map<List<SalePatientProdDto>>(patients);
+        return _mapper.Map<List<PatientDto>>(patients);
     }
 
-
+    //Total gastado por cada paciente en el Año (X)
     [HttpGet("TotalSpentPatient/{year}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,4 +67,66 @@ public class PatientController : BaseApiController
         return _mapper.Map<List<SpentPatientDto>>(patients);
     }
     
+
+
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Get(int id)
+    {
+        var patient = await _unitOfWork.People.GetByIdAsync(id);
+        return Ok(patient);
+    }
+
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Person>> Post(PatientDto patientDto)
+    {
+        var patient = _mapper.Map<Person>(patientDto);
+        _unitOfWork.People.Add(patient);
+        await _unitOfWork.SaveAsync();
+        if (patientDto == null)
+        {
+            return BadRequest();
+        }
+        patientDto.Id = patient.Id;
+        return CreatedAtAction(nameof(Post), new { id = patientDto.Id }, patientDto);
+    }
+
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<PatientDto>> Put([FromBody] PatientDto patientDto)
+    {
+        if (patientDto == null)
+        {
+            return NotFound();
+        }
+        var patient = _mapper.Map<Person>(patientDto);
+        _unitOfWork.People.Update(patient);
+        await _unitOfWork.SaveAsync();
+
+        return patientDto;
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var patient = await _unitOfWork.People.GetByIdAsync(id);
+        if (patient == null)
+        {
+            return NotFound();
+        }
+
+        _unitOfWork.People.Remove(patient);
+        await _unitOfWork.SaveAsync();
+
+        return NoContent();
+    }
 }
