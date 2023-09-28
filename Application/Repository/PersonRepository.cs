@@ -209,15 +209,41 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
     {
 
-        return await _context.People
-                            .Where(p => p.Role.Description.ToUpper() == "PROVEEDOR" )
-                            .Include(p => p.Role)
-                            .Include(p => p.Purchases)
-                            //.ThenInclude(ps => ps.PurchaseProducts)
-                            //.ThenInclude(pp => pp.Product)
-                            .ToListAsync();
-    }
+            return await _context.People
+                                .Where(p => p.Role.Description.ToUpper() == "Supplier" )
+                                .Include(p => p.Role)
+                                .Include(p => p.Purchases)
+                                .ThenInclude(ps => ps.PurchaseProducts)
+                                .ThenInclude(pp => pp.Product)
+                                .ToListAsync();
+        }
+        //Total de medicamentos vendidos por cada proveedor.
+        // public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+        // {
 
+        //     return await _context.People
+        //                         .Include(p => p.Purchases)
+        //                         .ToListAsync();                                
+        // }
+
+
+        //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
+        public async Task<Person> GetMajorSoldDfProductsInEmployeeAsync(int year)
+        {
+                return await _context.People
+                    .Where(p => p.SalesEmp.Any(sp => sp.SaleDate.Year == year))
+                    .Include(p => p.Role)
+                    .Include(p => p.PersonType)
+                    .Include(p => p.IdentificationType)
+                    .Include(p => p.JobTitle)
+                    .OrderByDescending(p => p.SalesEmp
+                        .SelectMany(sp => sp.SaleProducts.Select(saleProduct => saleProduct.Product_Fk))
+                        .Distinct()
+                        .Count())
+                    .FirstOrDefaultAsync();
+
+
+        }
 }
 
 

@@ -118,13 +118,14 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                         .ToListAsync();
     }
     //Obtener el medicamento menos vendido en 2023.
-    // public async Task<Product> GetLowestSellingProductAsync()
-    // {
-    //     return await _context.Products
-    //         .OrderBy(e => e.SaleProducts.Sum(sp => sp.Quantity)) // Ordenar por la suma de las cantidades vendidas
-    //         .FirstAsync(); // Tomar el primer producto (el que tiene la cantidad de ventas más baja)
+    public async Task<Product> GetLowestSellingProductAsync(int year)
+    {
+        return await _context.Products
+            .Where(p => p.SaleProducts.Any(sp => sp.Sale.SaleDate.Year == year ))
+            .OrderBy(p=> p.SaleProducts.Min(p => p.Quantity)) // Ordenar por la suma de las cantidades vendidas
+            .FirstOrDefaultAsync(); // Tomar el primer producto (el que tiene la cantidad de ventas más baja)
 
-    // }
+    }
 
 
 }   

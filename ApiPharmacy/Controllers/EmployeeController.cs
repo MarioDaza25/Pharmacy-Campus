@@ -147,4 +147,14 @@ public class EmployeeController : BaseApiController
 
         return NoContent();
     }
+    [HttpGet("GetMajorSoldDfProductsInEmployee/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<EmployeeDto>> Get6(int year)
+    {
+        var employee = await _unitOfWork.People.GetMajorSoldDfProductsInEmployeeAsync(year);
+        return _mapper.Map<EmployeeDto>(employee);
+    }
+
+
 }
