@@ -205,9 +205,9 @@ public class PersonRepository : GenericRepository<Person>, IPerson
 
 
 
-        // //Total de medicamentos vendidos por cada proveedor.
-        public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
-        {
+    //Total de medicamentos vendidos por cada proveedor. ?????????????????
+    public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+    {
 
             return await _context.People
                                 .Where(p => p.Role.Description.ToUpper() == "Supplier" )
@@ -230,7 +230,6 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
         public async Task<Person> GetMajorSoldDfProductsInEmployeeAsync(int year)
         {
-
                 return await _context.People
                     .Where(p => p.SalesEmp.Any(sp => sp.SaleDate.Year == year))
                     .Include(p => p.Role)

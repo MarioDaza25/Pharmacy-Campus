@@ -1,6 +1,4 @@
 
-using Domain.Entities;
-
 namespace ApiPharmacy.Dtos;
 public class SupplierDto
 {
