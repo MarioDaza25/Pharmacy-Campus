@@ -36,10 +36,10 @@ public class MappingProfiles : Profile
         
         CreateMap<TotalProductYear, TotalProductDto>().ReverseMap();
         CreateMap<SupplierGain, SupplierGainDto>().ReverseMap();
-        CreateMap<SupplierContact, SupplierContactDto>().ReverseMap();
+        
         CreateMap<Purchase, PurchaseDto>().ReverseMap();
         CreateMap<Role, RoleDto>().ReverseMap();
-          CreateMap<Person, SupplierPurchasesDto>().ReverseMap();
+        CreateMap<Person, SupplierPurchasesDto>().ReverseMap();
 
     }
 }

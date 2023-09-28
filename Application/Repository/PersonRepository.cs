@@ -205,67 +205,20 @@ public class PersonRepository : GenericRepository<Person>, IPerson
 
 
 
-        // //Total de medicamentos vendidos por cada proveedor.
-        public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
-        {
+    //Total de medicamentos vendidos por cada proveedor. ?????????????????
+    public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
+    {
 
-            return await _context.People
-                                .Where(p => p.Role.Description.ToUpper() == "Supplier" )
-                                .Include(p => p.Role)
-                                .Include(p => p.Purchases)
-                                .ThenInclude(ps => ps.PurchaseProducts)
-                                .ThenInclude(pp => pp.Product)
-                                .ToListAsync();
-        }
-        //Total de medicamentos vendidos por cada proveedor.
-        // public async Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync() 
-        // {
+        return await _context.People
+                            .Where(p => p.Role.Description.ToUpper() == "PROVEEDOR" )
+                            .Include(p => p.Role)
+                            .Include(p => p.Purchases)
+                            //.ThenInclude(ps => ps.PurchaseProducts)
+                            //.ThenInclude(pp => pp.Product)
+                            .ToListAsync();
+    }
 
-        //     return await _context.People
-        //                         .Include(p => p.Purchases)
-        //                         .ToListAsync();                                
-        // }
-
-
-        //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
-        // public async Task<IEnumerable<Product>> GetMajorSoldDfProductsInEmployeeAsync()
-        // {
-        //     // return await _context.People
-            //                     .Where(person => person.Role.Description.ToUpper() == "Employee")
-            //                     .Where(person =>  
-            //                     {
-            //                         Person EmployeeWithMayorSoldProductDF;
-            //                         int valorActual = 0;
-            //                         foreach (var saleEmp in person.SalesEmp)
-            //                         {
-            //                             foreach (var saleProduct in saleEmp.SaleProducts)
-            //                             {
-            //                                 int coincidencias = 0;
-            //                                 for (int i = 0; i < saleEmp.SaleProducts.Count(); i++)
-            //                                 {
-            //                                     if (saleProduct.Product_Fk !=  saleEmp.SaleProducts.ToList()[i].Product_Fk)
-            //                                     {
-            //                                         coincidencias++;
-            //                                     }
-            //                                 }
-
-            //                                 if(coincidencias > valorActual)
-            //                                 {
-            //                                     valorActual = coincidencias;
-            //                                     EmployeeWithMayorSoldProductDF = person;
-            //                                 }
-            //                             }
-            //                         }
-            //                     });
-                // return _context.People
-                // .Select(p => p.SalesEmp)
-                // .Where(saleEmp => saleEmp.SaleDate.Year == 2023)  // Filtrar por ventas en 2023
-                // .GroupBy(saleEmp => saleEmp.Employee)  // Agrupar por empleado
-                // .OrderByDescending(group => group.SelectMany(saleEmp => saleEmp.SaleProducts.Select(saleProduct => saleProduct.Product_Fk)).Distinct().Count())
-                // .Select(group => group.Key)
-                // .FirstOrDefault();
-
-        }
+}
 
 
 

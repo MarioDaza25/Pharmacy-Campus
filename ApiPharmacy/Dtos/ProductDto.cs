@@ -9,5 +9,3 @@ public class ProductDto
     public double Stock { get; set; }
     public DateTime ExpirationDate  { get; set; }
 }
-    public DateTime ExpirationDate  { get; set; }  
-} 
