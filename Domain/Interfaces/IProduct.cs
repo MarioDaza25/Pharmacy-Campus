@@ -12,7 +12,7 @@ public interface IProduct : IGenericRepository<Product>
   Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month);
   Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier);
   Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim);
-  //Task<Product> GetLowestSellingProductAsync();
+  Task<Product> GetLowestSellingProductAsync(int year);
   Task<decimal> GetTotalGain();
 
 }

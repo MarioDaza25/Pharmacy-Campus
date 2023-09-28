@@ -225,19 +225,19 @@ public class ProductController : BaseApiController
         return NoContent();
     }
 
-    // [HttpGet("GetLowestSellingProduct")]
-    // [ProducesResponseType(StatusCodes.Status200OK)]
-    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(StatusCodes.Status404NotFound)]
-    // public async Task<ActionResult<ProductDto>> GetContactSupplier()
-    // {
-    //     var products = await _unitOfWork.Products.GetLowestSellingProductAsync();
-    //     if(products == null)
-    //     {
-    //         return BadRequest();
-    //     }
-    //     return _mapper.Map<ProductDto>(products);
-    // }
+    [HttpGet("GetLowestSellingProduct/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductDto>> GetLowestSellingProduct(int year)
+    {
+        var product = await _unitOfWork.Products.GetLowestSellingProductAsync(year);
+        if(product == null)
+        {
+            return BadRequest();
+        }
+        return _mapper.Map<ProductDto>(product);
+    }
     
 
 
