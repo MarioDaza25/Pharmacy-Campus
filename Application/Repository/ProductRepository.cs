@@ -13,7 +13,17 @@ public class ProductRepository : GenericRepository<Product>, IProduct
         _context = context;
     }
 
-    //Total de medicamentos vendidos en el trimestre (X) del Año (X). 
+    //Listar los proveedores con su información de contacto en medicamentos. (OK)
+    public async Task<IEnumerable<Product>> GetAllInfoAsync()
+    {
+        return await _context.Products
+                        .Include(p => p.Supplier)
+                        .ThenInclude(s => s.Emails)
+                        .Where(p => p.Supplier != null)
+                        .ToListAsync();
+    }
+
+    //Total de medicamentos vendidos en el trimestre (X) del Año (X). (OK) 
     public async Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim)
     {
         int month = (trim - 1) * 3 + 1;
@@ -30,13 +40,15 @@ public class ProductRepository : GenericRepository<Product>, IProduct
         .ToListAsync();
     }
 
-    //Cantidad total de dinero recaudado por las ventas de medicamentos
+
+    //Cantidad total de dinero recaudado por las ventas de medicamentos (OK)
     public async Task<decimal> GetTotalGain()
     {
         return await _context.SaleProducts.SumAsync(sp => sp.Price);
 
     }
 
+    //Obtener todos los medicamentos con menos de (X) unidades en stock (OK)
     public async Task<IEnumerable<Product>> GetLessThanStockAsync(int amount)
     {
         return await _context.Products
@@ -44,71 +56,49 @@ public class ProductRepository : GenericRepository<Product>, IProduct
                             .ToListAsync();
     }
 
- // creacion Repositiorio de Medicamentos que caducan antes del 1 de enero de 2024.
+    //Medicamentos que caducan antes del dia (X) del Mes (X) del año (X) (OK)
     public async Task<IEnumerable<Product>> GetAllProductExpiredBeforeAsync(DateTime expiryDate)
     {
         return await _context.Products
-                            .Where(p => p.ExpirationDate.Date < expiryDate)
-                            .ToListAsync();
+                        .Where(p => p.ExpirationDate.Date < expiryDate)
+                        .ToListAsync();
     }
-    //Medicamentos con un precio mayor a 50 y un stock menor a 100.
+
+    //Medicamentos con un precio mayor a (X) y un stock menor a (X). (OK)
     public async Task<IEnumerable<Product>> GetHighPricedLowStockAsync(decimal price, double stock)
     {
         return await _context.Products
-                            .Where(p => p.Price > price && p.Stock < stock)
-                            .ToListAsync();
+                        .Where(p => p.Price > price && p.Stock < stock)
+                        .ToListAsync();
     } 
-    //Medicamentos que no han sido vendidos nunca.
+
+    //Medicamentos que no han sido vendidos nunca. (OK)
     public async Task<IEnumerable<Product>> GetAllProductsNeverSold()
     {
         return await _context.Products
                             .Where(p => !p.SaleProducts.Any())
                             .ToListAsync();
     }
-    //Medicamentos que no han sido vendidos en 2023.
-    public async Task<IEnumerable<Product>> GetAllProductsNotSoldInYearAsync(DateTime year)
-    {
 
-        return await _context.Products
-                            .Where(product =>
-                                !product.SaleProducts.Any(saleProduct =>
-                                    saleProduct.Sale.SaleDate >= year.AddYears(-1) && saleProduct.Sale.SaleDate <= year.Date))
-                                    .ToListAsync();
-    }                      
-    public async Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int month)
-    {
-        return await _context.Products
-                            .Where(product =>
-                                product.SaleProducts.Any(saleProduct =>
-                                    saleProduct.Sale.SaleDate.Month == month))
-                                    .ToListAsync();
-    }
-    //Medicamentos comprados al ‘Proveedor A’.
+    //Medicamentos comprados al ‘Proveedor A’. (OK)
     public async Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier)
     {
         return await _context.Products
                             .Where(product =>
-                                product.PurchaseProducts.Any(purchaseProduct =>
-                                    purchaseProduct.Purchase.Supplier.Name == supplier ))
-                                    .ToListAsync();
+                            product.PurchaseProducts.Any(purchaseProduct =>
+                            purchaseProduct.Purchase.Supplier.Name.ToUpper() == supplier.ToUpper() ))
+                            .ToListAsync();
     } 
-    public async Task<IEnumerable<SupplierContact>> GetContactSupplierInProductAsync() 
+
+    //Medicamentos que no han sido vendidos en el año (X). (OK)
+    public async Task<IEnumerable<Product>> GetAllProductsNotSoldInYearAsync(int year)
     {
         return await _context.Products
-                            .Include(p => p.Supplier)
-                            .Select(p => new SupplierContact
-                            {
-                                Name = p.Name,
-                                Price = p.Price,
-                                Stock = p.Stock,
-                                ExpirationDate = p.ExpirationDate,
-                                SupplierName = p.Supplier.Name,
-                                Email =  string.Join(", ", p.Supplier.Emails
-                                    .Where(e => e.EmailType.Description.ToUpper() == "TRABAJO")
-                                    .Select(e => e.Description))
-                            })
+                            .Where(product =>
+                            !product.SaleProducts.Any(sp => sp.Sale.SaleDate.Year >= (year - 1) 
+                            && sp.Sale.SaleDate.Year <= year))
                             .ToListAsync();
-    }
+    }  
     //Obtener el medicamento menos vendido en 2023.
     // public async Task<Product> GetLowestSellingProductAsync()
     // {
@@ -119,6 +109,27 @@ public class ProductRepository : GenericRepository<Product>, IProduct
     // }
 
 
+    //Medicamentos que han sido vendidos cada mes del año 2023 (OK)
+    public async Task<IEnumerable<Product>> GetAllProductsSoldInMonthAsync(int year)
+    {
+        return await _context.Products
+                        .Where(product =>product.SaleProducts
+                        .All(sp => sp.Sale.SaleDate.Year == year))
+                        .ToListAsync();
+    }
+    //Obtener el medicamento menos vendido en 2023.
+    public async Task<Product> GetLowestSellingProductAsync(int year)
+    {
+        return await _context.Products
+            .Where(p => p.SaleProducts.Any(sp => sp.Sale.SaleDate.Year == year ))
+            .OrderBy(p=> p.SaleProducts.Min(p => p.Quantity)) // Ordenar por la suma de las cantidades vendidas
+            .FirstOrDefaultAsync(); // Tomar el primer producto (el que tiene la cantidad de ventas más baja)
+
+    }
+
+
 }   
+
+
 
 
