@@ -228,8 +228,8 @@ public class PersonRepository : GenericRepository<Person>, IPerson
 
 
         //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
-        // public async Task<IEnumerable<Product>> GetMajorSoldDfProductsInEmployeeAsync()
-        // {
+        public async Task<Person> GetMajorSoldDfProductsInEmployeeAsync(int year)
+        {
         //     // return await _context.People
             //                     .Where(person => person.Role.Description.ToUpper() == "Employee")
             //                     .Where(person =>  
@@ -258,14 +258,22 @@ public class PersonRepository : GenericRepository<Person>, IPerson
             //                         }
             //                     });
                 // return _context.People
-                // .Select(p => p.SalesEmp)
-                // .Where(saleEmp => saleEmp.SaleDate.Year == 2023)  // Filtrar por ventas en 2023
-                // .GroupBy(saleEmp => saleEmp.Employee)  // Agrupar por empleado
-                // .OrderByDescending(group => group.SelectMany(saleEmp => saleEmp.SaleProducts.Select(saleProduct => saleProduct.Product_Fk)).Distinct().Count())
-                // .Select(group => group.Key)
-                // .FirstOrDefault();
+
+                return await _context.People
+                    .Where(p => p.SalesEmp.Any(sp => sp.SaleDate.Year == year))
+                    .Include(p => p.Role)
+                    .Include(p => p.PersonType)
+                    .Include(p => p.IdentificationType)
+                    .Include(p => p.JobTitle)
+                    .OrderByDescending(p => p.SalesEmp
+                        .SelectMany(sp => sp.SaleProducts.Select(saleProduct => saleProduct.Product_Fk))
+                        .Distinct()
+                        .Count())
+                    .FirstOrDefaultAsync();
+
 
         }
+}
 
 
 
