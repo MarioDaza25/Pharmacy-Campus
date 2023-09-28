@@ -230,34 +230,6 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023.😃
         public async Task<Person> GetMajorSoldDfProductsInEmployeeAsync(int year)
         {
-        //     // return await _context.People
-            //                     .Where(person => person.Role.Description.ToUpper() == "Employee")
-            //                     .Where(person =>  
-            //                     {
-            //                         Person EmployeeWithMayorSoldProductDF;
-            //                         int valorActual = 0;
-            //                         foreach (var saleEmp in person.SalesEmp)
-            //                         {
-            //                             foreach (var saleProduct in saleEmp.SaleProducts)
-            //                             {
-            //                                 int coincidencias = 0;
-            //                                 for (int i = 0; i < saleEmp.SaleProducts.Count(); i++)
-            //                                 {
-            //                                     if (saleProduct.Product_Fk !=  saleEmp.SaleProducts.ToList()[i].Product_Fk)
-            //                                     {
-            //                                         coincidencias++;
-            //                                     }
-            //                                 }
-
-            //                                 if(coincidencias > valorActual)
-            //                                 {
-            //                                     valorActual = coincidencias;
-            //                                     EmployeeWithMayorSoldProductDF = person;
-            //                                 }
-            //                             }
-            //                         }
-            //                     });
-                // return _context.People
 
                 return await _context.People
                     .Where(p => p.SalesEmp.Any(sp => sp.SaleDate.Year == year))
@@ -273,7 +245,21 @@ public class PersonRepository : GenericRepository<Person>, IPerson
 
 
         }
+        //Promedio de medicamentos comprados por venta.
+        public async Task<dynamic> GetProductsAverangebySale()
+        {
+            return await _context.SaleProducts
+                .GroupBy(p => p.Sale_Fk)
+                .Select(g => new SaleAverange {
+                    SaleFk = g.Key,
+                    Averange = g.Average(p => p.Quantity)
+                })
+                .ToListAsync();
+                                                      
+        }
+
 }
+
 
 
 
