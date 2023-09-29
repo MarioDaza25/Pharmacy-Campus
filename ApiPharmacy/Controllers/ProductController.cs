@@ -240,5 +240,19 @@ public class ProductController : BaseApiController
     }
     
 
-
+    [HttpGet("GetProductsAverangebySale")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<SaleAverangeDto>>> GetProductsAverangebySale()
+    {
+        var products = await _unitOfWork.Products.GetProductsAverangebySaleAsync();
+        if(products == null)
+        {
+            return BadRequest();
+        }
+        return _mapper.Map<List<SaleAverangeDto>>(products);
+    }
+ 
+    
 }

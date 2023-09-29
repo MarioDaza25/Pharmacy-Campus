@@ -7,7 +7,8 @@ namespace Domain.Entities
 {
     public class SaleAverange 
     {
-        public int SaleFk { get; set; }
+        public int Sale { get; set; }
+
         public double Averange  {get;set;}
     }
 }

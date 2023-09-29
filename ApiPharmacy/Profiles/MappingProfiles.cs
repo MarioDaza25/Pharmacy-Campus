@@ -38,6 +38,9 @@ public class MappingProfiles : Profile
         CreateMap<SupplierGain, SupplierGainDto>().ReverseMap();
         CreateMap<Purchase, PurchaseDto>().ReverseMap();
         CreateMap<Person, SupplierPurchasesDto>().ReverseMap();
+        CreateMap<SaleAverange, SaleAverangeDto>().ReverseMap();
+        CreateMap<Sale, SaleDto>().ReverseMap();
+
 
     }
 }

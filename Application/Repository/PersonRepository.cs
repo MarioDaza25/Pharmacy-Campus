@@ -244,17 +244,47 @@ public class PersonRepository : GenericRepository<Person>, IPerson
 
 
         }
-        //Promedio de medicamentos comprados por venta.
-        public async Task<dynamic> GetProductsAverangebySale()
+        //Paciente que ha gastado más dinero en 2023.
+        public async Task<Person> GetPatientSpendMostMoneyInYear(int year)
         {
-            return await _context.SaleProducts
-                .GroupBy(p => p.Sale_Fk)
-                .Select(g => new SaleAverange {
-                    SaleFk = g.Key,
-                    Averange = g.Average(p => p.Quantity)
-                })
-                .ToListAsync();
-                                                      
+            return await _context.People
+                .Where(p =>p.SalesPat.Any(sp => sp.SaleDate.Year == year))
+                .OrderByDescending(s => s.SalesPat
+                .SelectMany(sp => sp.SaleProducts)
+                .Sum(p => p.Price))
+                .FirstOrDefaultAsync();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //.Any(p => p.SalesPat.Sum(sp => sp.SaleProducts.))
+            // .GroupBy(p => p.SalesPat.SelectMany(p => p.SaleProducts.Select(saleProduct => saleProduct.Sale_Fk)))
+            // .Select(g => g.Sum(g => g.));
+            //     //         .OrderByDescending( p => p.SalesPat
+                // .SelectMany(sp => sp.SaleProducts.Select(saleProduct => saleProduct.Sum(p => p.price))))
+                // .FirstOrDefaultAsync();
         }
 
 }
