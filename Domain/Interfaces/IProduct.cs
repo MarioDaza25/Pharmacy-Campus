@@ -19,5 +19,6 @@ public interface IProduct : IGenericRepository<Product>
   Task<IEnumerable<Product>> GetAllProductExpiredAsync(int year);
   
   Task<decimal> GetTotalGain();
+  Task<IEnumerable<SaleAverange>> GetProductsAverangebySaleAsync();
 
 }

@@ -19,10 +19,5 @@ public interface IPerson : IGenericRepository<Person>
     Task<IEnumerable<SupplierGain>> TotalSupplierGain(int year);
     Task<IEnumerable<Person>> GetSupplierNeverSell(int year);
     Task<IEnumerable<Person>> GetProductsSoldEachSupplierAsync();
-    Task<IEnumerable<Person>> GetSuppliersWithAtLeastProductsAsync(int year, int amount);
-    Task<IEnumerable<Person>> GetSupplierWithStockAsync(int amount);
-    Task<int> GetTotalSuppliersYearAsync(int year);
-    Task<Person> GetSupplierMostSuminAsync(int year);
-    Task<Person> GetEmployeeDifferentProducts(int year);
-    Task<IEnumerable<SupplierGroup>> GetTotalProductsSupplier();
+    Task<Person> GetMajorSoldDfProductsInEmployeeAsync(int year);
 }

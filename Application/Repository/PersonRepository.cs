@@ -278,20 +278,8 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                     .FirstOrDefaultAsync();
     }
 
-    //Número de medicamentos por proveedor. (OK)
-    public async Task<IEnumerable<SupplierGroup>> GetTotalProductsSupplier()
-    {
-        return await (from purchaseProduct in _context.PurchasesProducts
-                group purchaseProduct by purchaseProduct.Purchase.Supplier into supplierGroup
-                select new SupplierGroup
-                {
-                    SupplierName = supplierGroup.Key.Name,
-                    NumberOfProducts = supplierGroup.Count()
-                }).ToListAsync();
-    }
-
-    
 }
+
 
 
 
