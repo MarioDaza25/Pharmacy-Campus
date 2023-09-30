@@ -127,6 +127,18 @@ public class ProductRepository : GenericRepository<Product>, IProduct
 
     }
 
+        //Promedio de medicamentos comprados por venta.
+        public async Task<IEnumerable<SaleAverange>> GetProductsAverangebySaleAsync()
+        {
+            return await _context.SaleProducts
+                .GroupBy(p => p.Sale_Fk)
+                .Select(g => new SaleAverange {
+                    Sale = g.First().Sale.Id,
+                    Averange = g.Average(p => p.Quantity)
+                })
+                .ToListAsync();
+                                                      
+        }
 
 }   
 

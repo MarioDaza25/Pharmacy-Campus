@@ -14,5 +14,6 @@ public interface IProduct : IGenericRepository<Product>
   Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim);
   Task<Product> GetLowestSellingProductAsync(int year);
   Task<decimal> GetTotalGain();
+  Task<IEnumerable<SaleAverange>> GetProductsAverangebySaleAsync();
 
 }

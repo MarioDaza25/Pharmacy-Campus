@@ -68,7 +68,15 @@ public class PatientController : BaseApiController
         return _mapper.Map<List<SpentPatientDto>>(patients);
     }
     
-
+    [HttpGet("GetSpendMostMoneyInYear/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PatientDto>> GetPatientSpendMostMoneyInYear(int year)
+    {
+        var patient = await _unitOfWork.People.GetPatientSpendMostMoneyInYear(year);
+        return _mapper.Map<PatientDto>(patient);
+    }
 
 
     [HttpGet("{id}")]
