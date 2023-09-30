@@ -6,6 +6,6 @@ public class SupplierPurchasesDto
     public string Identification { get; set; }
     public string Name { get; set; }
     public RoleDto Role { get; set; }
-    public List<PurchaseDto> Purchases  { get; set; }
+    public List<ProductNameDto> Products  { get; set; }
     
 }

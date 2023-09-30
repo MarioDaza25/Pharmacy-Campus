@@ -147,12 +147,14 @@ public class EmployeeController : BaseApiController
 
         return NoContent();
     }
-    [HttpGet("GetMajorSoldDfProductsInEmployee/{year}")]
+
+    //Empleado que ha vendido la mayor cantidad de medicamentos distintos en 2023
+    [HttpGet("GetEmployeeDifferentProducts/{year}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<EmployeeDto>> Get6(int year)
     {
-        var employee = await _unitOfWork.People.GetMajorSoldDfProductsInEmployeeAsync(year);
+        var employee = await _unitOfWork.People.GetEmployeeDifferentProducts(year);
         return _mapper.Map<EmployeeDto>(employee);
     }
 

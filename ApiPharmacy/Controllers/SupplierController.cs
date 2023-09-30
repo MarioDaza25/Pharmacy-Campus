@@ -45,8 +45,54 @@ public class SupplierController : BaseApiController
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   public async Task<ActionResult<IEnumerable<SupplierDto>>> Get3(int date)
   {
-      var patients = await _unitOfWork.People.GetSupplierNeverSell(date);
-      return _mapper.Map<List<SupplierDto>>(patients);
+      var supplier = await _unitOfWork.People.GetSupplierNeverSell(date);
+      return _mapper.Map<List<SupplierDto>>(supplier);
+  }
+
+  //Número total de proveedores que suministraron medicamentos en 2023
+  [HttpGet("GetTotalYear/{year}")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<IActionResult> Get5(int year)
+  {
+      var amount = await _unitOfWork.People.GetTotalSuppliersYearAsync(year);
+
+      var dto = new TotalSupplierYear
+      {
+          TotalSuppliers = amount
+      };
+
+      return Ok(dto);
+  }
+
+  //Proveedor que ha suministrado más medicamentos en 2023
+  [HttpGet("MostSuminAsync/{year}")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<ActionResult<SupplierDto>> Get4(int year)
+  {
+      var supplier = await _unitOfWork.People.GetSupplierMostSuminAsync(year);
+      return _mapper.Map<SupplierDto>(supplier);
+  }
+
+  //Número de medicamentos por proveedor.
+  [HttpGet("TotalProductsSupplier")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<ActionResult<IEnumerable<SupplierGroupDto>>> Get5()
+  {
+      var suppliers = await _unitOfWork.People.GetTotalProductsSupplier();
+      return _mapper.Map<List<SupplierGroupDto>>(suppliers);
+  }
+
+  //Proveedores que han suministrado al menos 5 medicamentos diferentes en 2023. 
+  [HttpGet("WithAtLeastProducts/{amount}/{year}")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<ActionResult<IEnumerable<SupplierDto>>> Get5(int amount, int year)
+  {
+      var suppliers = await _unitOfWork.People.GetSuppliersWithAtLeastProductsAsync(amount, year);
+      return _mapper.Map<List<SupplierDto>>(suppliers);
   }
 
 
@@ -109,12 +155,22 @@ public class SupplierController : BaseApiController
     return NoContent();
   }
 
-    [HttpGet("GetProductsSoldEachSupplier")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-     public async Task<IEnumerable<SupplierPurchasesDto>> GetProductsSoldEachSupplier()
-     {
-        var suppliers = await _unitOfWork.People.GetProductsSoldEachSupplierAsync();
-        return _mapper.Map<List<SupplierPurchasesDto>>(suppliers);
-     }
+  [HttpGet("GetProductsSoldEachSupplier")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<IEnumerable<SupplierPurchasesDto>> GetProductsSoldEachSupplier()
+  {
+    var suppliers = await _unitOfWork.People.GetProductsSoldEachSupplierAsync();
+    return _mapper.Map<List<SupplierPurchasesDto>>(suppliers);
+  }
+
+  //Proveedores de los medicamentos con menos de 50 unidades en stock
+  [HttpGet("WithStock/{amount}")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<IEnumerable<SupplierProductDto>> Get6(int amount)
+  {
+    var suppliers = await _unitOfWork.People.GetSupplierWithStockAsync(amount);
+    return _mapper.Map<List<SupplierProductDto>>(suppliers);
+  }
 }

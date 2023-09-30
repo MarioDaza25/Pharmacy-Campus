@@ -13,6 +13,11 @@ public interface IProduct : IGenericRepository<Product>
   Task<IEnumerable<Product>> GetAllProductsBySupplierAsync(string supplier);
   Task<IEnumerable<TotalProductYear>> AllSalesQuarter(int year, int trim);
   Task<Product> GetLowestSellingProductAsync(int year);
+  Task<Product> GetProductMostExpensive();
+  Task<int> GetTotalProductMonthAsync(int month, int year);
+  Task<IEnumerable<ProductMonth>> GetTotalProduct(int year);
+  Task<IEnumerable<Product>> GetAllProductExpiredAsync(int year);
+  
   Task<decimal> GetTotalGain();
 
 }
