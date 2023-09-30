@@ -2,10 +2,10 @@ namespace Domain.Entities;
 
 public class Person : BaseEntity
 {
-  public string Identification { get; set; }
+  public string Name { get; set; }
   public int IdentificationType_Fk { get; set; }
   public IdentificationType IdentificationType { get; set; }
-  public string Name { get; set; }
+  public string Identification { get; set; }
   public int PersonType_Fk { get; set; }
   public PersonType PersonType { get; set; }
   public int? Role_Fk { get; set; }

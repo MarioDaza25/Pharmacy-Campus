@@ -179,6 +179,16 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         .ToListAsync();
     }
 
+    public async Task<Person> GetPatientSpendMostMoneyInYear(int year)
+        {
+            return await _context.People
+                .Where(p =>p.SalesPat.Any(sp => sp.SaleDate.Year == year))
+                .OrderByDescending(s => s.SalesPat
+                .SelectMany(sp => sp.SaleProducts)
+                .Sum(p => p.Price))
+                .FirstOrDefaultAsync();
+        }
+
 //      ==================================== PROVEEDORES =========================================================
 //=================================================================================================================
     
@@ -252,6 +262,19 @@ public class PersonRepository : GenericRepository<Person>, IPerson
                            .ToListAsync();  
                             
     }
+    //Número de medicamentos por proveedor. (OK)
+    public async Task<IEnumerable<SupplierGroup>> GetTotalProductsSupplier()
+    {
+        return await (from purchaseProduct in _context.PurchasesProducts
+                group purchaseProduct by purchaseProduct.Purchase.Supplier into supplierGroup
+                select new SupplierGroup
+                {
+                    SupplierName = supplierGroup.Key.Name,
+                    NumberOfProducts = supplierGroup.Count()
+                }).ToListAsync();
+    }
+
+    
 
     //Número total de proveedores que suministraron medicamentos en 2023. (OK)
     public async Task<int> GetTotalSuppliersYearAsync(int year)
