@@ -11,7 +11,7 @@ public class Person : BaseEntity
   public int? Role_Fk { get; set; }
   public Role Role { get; set; }
   public int? JobTitle_Fk { get; set; }
-  public JobTitle JobTitle { get; set; }
+  public JobTitle? JobTitle { get; set; }
   public DateTime? HireDate { get; set; }
 
   public ICollection<Address> Addresses { get; set; }

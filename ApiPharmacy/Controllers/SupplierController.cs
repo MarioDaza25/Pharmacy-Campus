@@ -20,7 +20,7 @@ public class SupplierController : BaseApiController
   }
 
   //Obterner Todos los Proveedores
-  [HttpGet]
+  [HttpGet("List")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   public async Task<ActionResult<IEnumerable<SupplierDto>>> Get()
@@ -96,14 +96,14 @@ public class SupplierController : BaseApiController
   }
 
 
-  [HttpGet("{id}")]
+  [HttpGet("Unique/{id}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
-  [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<IActionResult> Get(int id)
-  {
-    var supplier = await _unitOfWork.People.GetByIdAsync(id);
-    return Ok(supplier);
-  }
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<SupplierDto>> Get(string id)
+    {
+        var supplier = await _unitOfWork.People.GetByIdAsync(id);
+        return _mapper.Map<SupplierDto>(supplier);
+    }
 
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status200OK)]
@@ -141,7 +141,7 @@ public class SupplierController : BaseApiController
   [HttpDelete("{id}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<IActionResult> Delete(int id)
+  public async Task<IActionResult> Delete(string id)
   {
     var supplier = await _unitOfWork.People.GetByIdAsync(id);
     if (supplier == null)
@@ -155,6 +155,7 @@ public class SupplierController : BaseApiController
     return NoContent();
   }
 
+  //Total de medicamentos vendidos por cada proveedor
   [HttpGet("GetProductsSoldEachSupplier")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]

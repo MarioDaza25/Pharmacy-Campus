@@ -12,6 +12,16 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     {
         _context = context;
     }
+public override async Task<Person> GetByIdAsync(string id)
+{
+    return await _context.People
+        .Where(p => p.Identification == id)
+        .Include(p => p.Role)
+        .Include(p => p.PersonType)
+        .Include(p => p.IdentificationType)
+        .Include(p => p.JobTitle)
+        .FirstOrDefaultAsync();
+} 
 
 //      ====================================EMPLEADOS=========================================================
 //=================================================================================================================
@@ -46,6 +56,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     {
         return await _context.People
                     .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                    p.JobTitle.Description.ToUpper() != "DOCTOR" &&
                      p.SalesEmp.Count(s => s.SaleDate.Year == year) < sales)
                     .Include(p => p.Role)
                     .Include(p => p.PersonType)
@@ -59,7 +70,8 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     public async Task<IEnumerable<Person>> EmployeeNeverSaleMonthYear(int month, int year)
     {
         return await _context.People
-                    .Where(p => p.Role.Description.ToUpper() == "EMPLEADO"
+                    .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                    p.JobTitle.Description.ToUpper() != "DOCTOR" 
                     && (!p.SalesEmp.Any(s => s.SaleDate.Month == month &&  s.SaleDate.Year == year )))
                     .Include(p => p.Role)
                     .Include(p => p.PersonType)
@@ -73,6 +85,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     {
         return await _context.People
             .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                p.JobTitle.Description.ToUpper() != "DOCTOR" &&
                 (!p.SalesEmp.Any(s => s.SaleDate.Year == year)))
                 .Include(p => p.Role)
                 .Include(p => p.PersonType)
@@ -85,7 +98,8 @@ public class PersonRepository : GenericRepository<Person>, IPerson
     public async Task<IEnumerable<SalesEmployeeInfo>> CountAllSalesEmployees(int year)
     {
         return  await _context.People
-                .Where(p => p.Role.Description.ToUpper() == "EMPLEADO")
+                .Where(p => p.Role.Description.ToUpper() == "EMPLEADO" &&
+                p.JobTitle.Description.ToUpper() != "DOCTOR" )
                 .Select(employee => new SalesEmployeeInfo
                 {
                     Name = employee.Name,
@@ -212,7 +226,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         .Select(group => new SupplierGain
         {
             Supplier = group.Key,
-            TotalGain = Math.Round(group.Sum(sp => sp.Price * sp.Quantity))
+            TotalGain = Math.Round(group.Sum(sp => (sp.Product.Price * sp.Quantity)-(sp.Price * sp.Quantity)))
         })
         .ToListAsync();
     }
@@ -237,6 +251,7 @@ public class PersonRepository : GenericRepository<Person>, IPerson
             return await _context.People
                             .Where(p => p.Role.Description.ToUpper() == "PROVEEDOR" )
                             .Include(p => p.Role)
+                            .Include(p => p.IdentificationType)
                             .Include(p => p.Products)
                             .ToListAsync();
     }
@@ -247,7 +262,8 @@ public class PersonRepository : GenericRepository<Person>, IPerson
         return await _context.People
                 .Where(p => p.Role.Description.ToUpper() == "PROVEEDOR")
                 .Where(p => p.Products.Any(p => p.Stock < amount))
-                .Include(p => p.Products)
+                .Include(p => p.Products
+                .Where(pr => pr.Stock < amount))
                 .ToListAsync();
     }
 
