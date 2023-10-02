@@ -222,7 +222,7 @@ namespace Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("HireDate")
+                    b.Property<DateTime?>("HireDate")
                         .HasColumnType("DATETIME");
 
                     b.Property<string>("Identification")
@@ -233,7 +233,7 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("IdentificationType_Fk")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobTitle_Fk")
+                    b.Property<int?>("JobTitle_Fk")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -244,7 +244,8 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("PersonType_Fk")
                         .HasColumnType("int");
 
-                    b.Property<int>("Role_Fk")
+                    b.Property<int?>("Role_Fk")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -413,7 +414,6 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("DateTime");
 
                     b.Property<DateTime?>("Revoked")
-                        .IsRequired()
                         .HasColumnType("DateTime");
 
                     b.Property<string>("Token")
@@ -686,9 +686,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasOne("Domain.Entities.JobTitle", "JobTitle")
                         .WithMany("People")
-                        .HasForeignKey("JobTitle_Fk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("JobTitle_Fk");
 
                     b.HasOne("Domain.Entities.PersonType", "PersonType")
                         .WithMany("People")
