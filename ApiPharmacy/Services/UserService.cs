@@ -70,7 +70,7 @@ namespace API.Services
         if (user == null)
         {
             dataUserDto.IsAuthenticated = false;
-            dataUserDto.Message = $"no";
+            dataUserDto.Message = $"User does not exist with username {model.Name}.";
             return dataUserDto;
         }
 
@@ -102,13 +102,16 @@ namespace API.Services
                 _unitOfWork.Users.Update(user);
                 await _unitOfWork.SaveAsync();
             }
-            dataUserDto.Message = "si";
+
             return dataUserDto;
         }
         dataUserDto.IsAuthenticated = false;
-        dataUserDto.Message = "no";
+        dataUserDto.Message = $"Credenciales incorrectas para el usuario {user.Username}.";
         return dataUserDto;
     }
+
+
+    
     public async Task<string> AddRoleAsync(AddRoleDto model)
     {
 
