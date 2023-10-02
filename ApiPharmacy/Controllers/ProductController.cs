@@ -1,3 +1,4 @@
+using API.Helpers;
 using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Entities;
@@ -6,10 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
-
+    [ApiVersion("1.0")]
+    [ApiVersion("1.1")]
+    [Authorize(Roles = "Cajero")]
 public class ProductController : BaseApiController
-{
-    
+{    
         private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
@@ -27,6 +29,17 @@ public class ProductController : BaseApiController
     {
         var products = await _unitOfWork.Products.GetAllAsync();
         return _mapper.Map<List<ProductDto>>(products);
+    }
+
+    [HttpGet]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<ProductDto>>> Get11([FromQuery] Params productParams)
+    {
+        var products = await _unitOfWork.Products.GetAllAsync(productParams.PageIndex,productParams.PageSize,productParams.Search);
+        var lstProductDto = _mapper.Map<List<ProductDto>>(products.registros);
+        return new Pager<ProductDto>(lstProductDto,products.totalRegistros,productParams.PageIndex,productParams.PageSize,productParams.Search);
     }
 
 
