@@ -18,7 +18,7 @@ public class EmployeeController : BaseApiController
     }
 
     //Obterner Todos los Empleados
-    [HttpGet]
+    [HttpGet("List")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get()
@@ -88,13 +88,13 @@ public class EmployeeController : BaseApiController
     }
 
 
-    [HttpGet("{id}")]
+    [HttpGet("Unique/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Get(int id)
+    public async Task<ActionResult<EmployeeDto>> Get(string id)
     {
         var employee = await _unitOfWork.People.GetByIdAsync(id);
-        return Ok(employee);
+        return _mapper.Map<EmployeeDto>(employee);
     }
 
 
@@ -134,7 +134,7 @@ public class EmployeeController : BaseApiController
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(string id)
     {
         var employee = await _unitOfWork.People.GetByIdAsync(id);
         if (employee == null)
