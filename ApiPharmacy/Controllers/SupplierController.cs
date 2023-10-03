@@ -3,6 +3,7 @@ using Application.UnitOfWork;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
@@ -30,6 +31,8 @@ public class SupplierController : BaseApiController
   }
 
   //Ganancia total por proveedor en el Año (X)
+  [Authorize(Roles = "Administrador")]
+ 
   [HttpGet("TotalSupplierGain/{year}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,12 +43,12 @@ public class SupplierController : BaseApiController
   }
 
   //Proveedores  que no han vendido ningún medicamento en Un año Especifico
-  [HttpGet("NeverSell/{date}")]
+  [HttpGet("NeverSell/{year}")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<ActionResult<IEnumerable<SupplierDto>>> Get3(int date)
+  public async Task<ActionResult<IEnumerable<SupplierDto>>> Get3(int year)
   {
-      var supplier = await _unitOfWork.People.GetSupplierNeverSell(date);
+      var supplier = await _unitOfWork.People.GetSupplierNeverSell(year);
       return _mapper.Map<List<SupplierDto>>(supplier);
   }
 
