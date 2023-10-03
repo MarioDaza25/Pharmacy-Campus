@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiPharmacy.Controllers;
     [ApiVersion("1.0")]
     [ApiVersion("1.1")]
+    [Authorize(Roles = "Adimistrador , gerente")]
 public class ProductController : BaseApiController
 {    
         private readonly IUnitOfWork _unitOfWork;
@@ -22,6 +23,8 @@ public class ProductController : BaseApiController
 
     //Listar Todos Los Productos
     [HttpGet]
+    [AllowAnonymous]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ProductDto>>> Get()
@@ -31,7 +34,9 @@ public class ProductController : BaseApiController
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Pager<ProductDto>>> Get11([FromQuery] Params productParams)
@@ -252,6 +257,8 @@ public class ProductController : BaseApiController
 
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(int id)
@@ -261,6 +268,8 @@ public class ProductController : BaseApiController
     }
 
     [HttpPost]
+    [AllowAnonymous]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Product>> Post(ProductDto productDto)
@@ -278,6 +287,8 @@ public class ProductController : BaseApiController
 
 
     [HttpPut("{id}")]
+    [AllowAnonymous]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult<ProductDto>> Put(int id, [FromBody] ProductDto productDto)
     {
@@ -293,6 +304,8 @@ public class ProductController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [AllowAnonymous]
+    [Authorize(Roles = "Cajero")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Delete(int id)
@@ -308,7 +321,4 @@ public class ProductController : BaseApiController
 
         return NoContent();
     }
-
-
-
 }
