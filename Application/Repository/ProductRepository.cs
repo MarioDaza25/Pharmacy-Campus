@@ -13,6 +13,8 @@ public class ProductRepository : GenericRepository<Product>, IProduct
         _context = context;
     }
 
+
+    
     //Listar los proveedores con su información de contacto en medicamentos. (OK)
     public async Task<IEnumerable<Product>> GetAllInfoAsync()
     {
