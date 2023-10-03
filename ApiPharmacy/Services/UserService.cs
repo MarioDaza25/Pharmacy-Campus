@@ -39,13 +39,13 @@ namespace API.Services
 
         if (existingUser == null)
         {
-            /* var rolDefault = _unitOfWork.Roles
-                                    .Find(u => u.Nombre == Authorization.rol_default.ToString())
-                                    .First(); */
+            var rolDefault = _unitOfWork.JobTitles
+                                    .Find(u => u.Description.ToUpper() == Authorization.rol_default.ToString().ToUpper())
+                                    .First(); 
             try
             {
-/*                 user.Rols.Add(rolDefault);
- */                _unitOfWork.Users.Add(user);
+                user.JobsTitle.Add(rolDefault);
+                _unitOfWork.Users.Add(user);
                 await _unitOfWork.SaveAsync();
 
                 return $"User  {registerDto.Name} has been registered successfully";
