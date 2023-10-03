@@ -3,13 +3,13 @@ using ApiPharmacy.Dtos;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPharmacy.Controllers;
     [ApiVersion("1.0")]
     [ApiVersion("1.1")]
-    [Authorize(Roles = "Adimistrador , gerente")]
+    //[Authorize(Roles = "Adimistrador , gerente")]
 public class ProductController : BaseApiController
 {    
         private readonly IUnitOfWork _unitOfWork;
